@@ -1,5 +1,7 @@
 package integracion;
 
+import integracion.locales.DAOLocales;
+import integracion.locales.DAOLocalesImp;
 import integracion.operaciones.DAOAsignacion;
 import integracion.operaciones.DAOAsignacionImp;
 import integracion.operaciones.DAOPuerta;
@@ -45,6 +47,11 @@ public DAOPaneles nuevoDAOPaneles()	{
 
 public DAOEmpleado nuevoDAOEmpleado()	{
 	return new DAOEmpleadoImp();
+}
+
+
+public DAOLocales crearDAOLocales() {
+    return new DAOLocalesImp();
 }
 
 }

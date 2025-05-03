@@ -1,5 +1,6 @@
 package integracion;
 
+import integracion.locales.DAOLocales;
 import integracion.operaciones.DAOAsignacion;
 import integracion.operaciones.DAOPuerta;
 import integracion.paneles.DAOPaneles;
@@ -24,6 +25,6 @@ public abstract class FactoriaDAO {
 	public abstract DAOAvion nuevoDAOAvion();
 	public abstract DAOPaneles nuevoDAOPaneles();
 	public abstract DAOEmpleado nuevoDAOEmpleado();
-	
+	public abstract DAOLocales crearDAOLocales();
 
 }
