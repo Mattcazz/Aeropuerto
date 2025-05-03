@@ -4,6 +4,8 @@ import integracion.operaciones.DAOAsignacion;
 import integracion.operaciones.DAOAsignacionImp;
 import integracion.operaciones.DAOPuerta;
 import integracion.operaciones.DAOPuertaImp;
+import integracion.paneles.DAOPaneles;
+import integracion.paneles.DAOPanelesImp;
 import integracion.vuelos.DAOAvionImp;
 import integracion.vuelos.DAOVueloImp;
 import integracion.vuelos.DAOAvion;
@@ -33,6 +35,10 @@ public DAOVuelo nuevoDAOVuelo() {
 public DAOAvion nuevoDAOAvion() {
 	// TODO Auto-generated method stub
 	return new DAOAvionImp();
+}
+
+public DAOPaneles nuevoDAOPaneles()	{
+	return new DAOPanelesImp();
 }
 
 }

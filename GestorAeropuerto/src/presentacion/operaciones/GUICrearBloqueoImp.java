@@ -2,9 +2,9 @@ package presentacion.operaciones;
 
 import java.awt.GridLayout;
 
+import negocio.InfoAeropuerto;
 import negocio.operaciones.PeticionBloqueo;
 import negocio.operaciones.TransferBloqueo;
-import negocio.operaciones.InfoAeropuerto;
 import negocio.operaciones.TransferPuerta;
 
 import javax.swing.*;

@@ -15,8 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import negocio.InfoAeropuerto;
 import negocio.operaciones.PeticionPuerta;
-import negocio.operaciones.InfoAeropuerto;
 import negocio.operaciones.TransferPuerta;
 
 public class GUIVerPuertaImp extends GUIVerPuerta{

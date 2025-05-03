@@ -11,17 +11,17 @@ public class ControladorImp extends Controlador {
 			case SUB_PANELES: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
-//	            presentacion.paneles.CUs.GUIMenuCUsImp menu = (paneles.presentacion.CUs.GUIMenuCUsImp) paneles.presentacion.CUs.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+				marco.setVisible(false);
+				presentacion.paneles.CUs.GUIMenuCUsImp menu = (presentacion.paneles.CUs.GUIMenuCUsImp ) presentacion.paneles.CUs.GUIMenuCUsImp.getInstancia();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 	
 			case SUB_PERSONAL: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
+				marco.setVisible(false);
 //	            personal.presentacion.CUs.GUIMenuCUsImp menu = (personal.presentacion.CUs.GUIMenuCUsImp) personal.presentacion.CUs.GUIMenuCUs.getInstancia();
 //				JFrame menuFrame = menu.getFrame();
 //				menuFrame.setVisible(true);

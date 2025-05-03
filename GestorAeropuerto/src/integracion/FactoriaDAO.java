@@ -2,6 +2,7 @@ package integracion;
 
 import integracion.operaciones.DAOAsignacion;
 import integracion.operaciones.DAOPuerta;
+import integracion.paneles.DAOPaneles;
 import integracion.vuelos.DAOAvion;
 import integracion.vuelos.DAOVuelo;
 
@@ -20,5 +21,6 @@ public abstract class FactoriaDAO {
 	public abstract DAOAsignacion nuevoDAOAsignacion();
 	public abstract DAOVuelo nuevoDAOVuelo();
 	public abstract DAOAvion nuevoDAOAvion();
+	public abstract DAOPaneles nuevoDAOPaneles();
 
 }
