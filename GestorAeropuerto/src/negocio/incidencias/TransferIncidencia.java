@@ -21,6 +21,11 @@ public abstract class TransferIncidencia {
     
     // Métodos set
     
+	public TransferIncidencia() {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	public abstract void setId(String id);
 
     

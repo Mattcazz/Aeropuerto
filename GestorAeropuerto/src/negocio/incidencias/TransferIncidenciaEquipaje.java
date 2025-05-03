@@ -46,6 +46,11 @@ public class TransferIncidenciaEquipaje extends TransferIncidencia {
 		}
 	}
 
+	public TransferIncidenciaEquipaje() {
+		// TODO Auto-generated constructor stub
+		super();
+	}
+
 	public String getId() {
 		return String.join(" ", this.idPasajero);
 	}

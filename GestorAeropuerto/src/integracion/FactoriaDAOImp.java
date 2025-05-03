@@ -1,5 +1,13 @@
 package integracion;
 
+import integracion.financiera.CuentaBancariaDAO;
+import integracion.financiera.CuentaBancariaDAOImp;
+import integracion.financiera.EmpleadoDAO;
+import integracion.financiera.EmpleadoDAOImp;
+import integracion.financiera.FlujoCajaDAO;
+import integracion.financiera.FlujoCajaDAOImp;
+import integracion.financiera.LocalDAO;
+import integracion.financiera.LocalDAOImp;
 import integracion.incidencias.DAOIncidencia;
 import integracion.incidencias.DAOIncidenciaImp;
 import integracion.locales.DAOLocales;
@@ -60,4 +68,22 @@ public DAOIncidencia nuevoDAOIncidencia() {
 	return new DAOIncidenciaImp();
 }
 
+
+public CuentaBancariaDAO getCuentaBancariaDAO() {
+    return new CuentaBancariaDAOImp();
+}
+
+public FlujoCajaDAO getFlujoCajaDAO() {
+    return new FlujoCajaDAOImp();
+}
+
+@Override
+public EmpleadoDAO getEmpleadoDAO() {
+    return new EmpleadoDAOImp();
+}
+
+@Override
+public LocalDAO getLocalDAO() {
+    return new LocalDAOImp();
+}
 }

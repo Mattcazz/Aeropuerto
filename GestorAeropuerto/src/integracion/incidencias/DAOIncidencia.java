@@ -17,4 +17,6 @@ public interface DAOIncidencia {
     List<TransferIncidencia> listarPorTipo(String tipo);  // "vuelo" o "equipaje"
 
 	List<TransferIncidencia> listarPorEstado(String estado);  // Usado para listar las incidencias que ya han sido resueltas
+	
+    List<TransferIncidencia> obtener();
 }

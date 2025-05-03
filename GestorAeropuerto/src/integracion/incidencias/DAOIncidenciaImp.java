@@ -13,6 +13,7 @@ import negocio.incidencias.EstadoIncidencia;
 import negocio.incidencias.IncidenciaFactory;
 import negocio.incidencias.TipoIncidencia;
 import negocio.incidencias.TransferIncidencia;
+import negocio.incidencias.TransferIncidenciaEquipaje;
 
 public class DAOIncidenciaImp implements DAOIncidencia {
 
@@ -150,5 +151,29 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 		}
 		return lista;
 	}
+	
+	 @Override
+	    public List<TransferIncidencia> obtener() {
+	        List<TransferIncidencia> lista = new ArrayList<>();
+	        String sql = "SELECT * FROM Incidencia WHERE estado = 'resuelta'";
+
+	        try (PreparedStatement stmt = conexion.prepareStatement(sql);
+	             ResultSet rs = stmt.executeQuery()) {
+
+	            while (rs.next()) {
+	            	TransferIncidenciaEquipaje incidencia = new TransferIncidenciaEquipaje();
+	            	
+	            	incidencia.setCompensacion(rs.getFloat("compensacion_economica"));
+	            	incidencia.setDescripcion(rs.getString("descripcion"));
+	            	
+	                lista.add(incidencia);
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return lista;
+	    }
 
 }

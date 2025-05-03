@@ -51,10 +51,10 @@ public class ControladorImp extends Controlador {
 			case SUB_FINANCIERA: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
-//	            financiera.presentacion.CUs.GUIMenuCUsImp menu = (financiera.presentacion.CUs.GUIMenuCUsImp) financiera.presentacion.CUs.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+				marco.setVisible(false);
+	            presentacion.financiera.CUs.GUIMenuCUsImp menu = (presentacion.financiera.CUs.GUIMenuCUsImp) presentacion.financiera.CUs.GUIMenuCUs.getInstancia();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 	
