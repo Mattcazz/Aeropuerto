@@ -32,7 +32,10 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
         JButton salirBtn = new JButton("Salir");
 
         estilizarBoton(salirBtn);
-        salirBtn.addActionListener(e -> marco.setVisible(false));
+        salirBtn.addActionListener(e -> {
+        	marco.setVisible(false);
+        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
+        });
 
         buttonsPanel.add(gestionManualBtn);
         buttonsPanel.add(consultarPuertasBtn);

@@ -34,10 +34,17 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		JButton EliminarVueloButton = new JButton("Eliminar Vuelo");
 		JButton BuscarVueloButton = new JButton("Buscar Vuelo");
 		
+		 JButton salirBtn = new JButton("Salir");
+	     salirBtn.addActionListener(e -> {
+	        	marco.setVisible(false);
+	        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
+	        });
+		
 		buttonsPanel.add(CrearVueloButton);
 		buttonsPanel.add(ActualizarVueloButton);
 		buttonsPanel.add(EliminarVueloButton);
 		buttonsPanel.add(BuscarVueloButton);
+		buttonsPanel.add(salirBtn);
 		
 		panel.add(buttonsPanel);
 		

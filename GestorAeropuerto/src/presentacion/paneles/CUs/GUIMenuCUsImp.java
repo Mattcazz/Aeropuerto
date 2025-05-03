@@ -143,10 +143,9 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 			}
 		});
 		
-		SalirButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
+		SalirButton.addActionListener(e -> {
+		        	marco.setVisible(false);
+		        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
 		});
 		
 		marco.setVisible(true);

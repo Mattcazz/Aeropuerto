@@ -43,6 +43,12 @@ public class GUIMenuCUs {
 			JButton AnadirEmpleadosButton = new JButton("Añadir Empleados");
 			JButton EliminarEmpleadosButton = new JButton("Eliminar Empleados");
 			JButton GenerarInformeButton = new JButton("Generar Informe");
+			
+			 JButton salirBtn = new JButton("Salir");
+		     salirBtn.addActionListener(e -> {
+		        	marco.setVisible(false);
+		        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
+		        });
 
 			buttonsPanel.add(AsignacionButton);
 			buttonsPanel.add(MostrarListaButton);
@@ -50,6 +56,7 @@ public class GUIMenuCUs {
 			buttonsPanel.add(EliminarEmpleadosButton);
 			buttonsPanel.add(CrearNominaButton);
 			buttonsPanel.add(GenerarInformeButton);
+			buttonsPanel.add(salirBtn);
 		
 			AsignacionButton.setFocusPainted(false);
 			
