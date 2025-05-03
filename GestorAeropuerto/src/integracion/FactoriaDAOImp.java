@@ -6,6 +6,8 @@ import integracion.operaciones.DAOPuerta;
 import integracion.operaciones.DAOPuertaImp;
 import integracion.paneles.DAOPaneles;
 import integracion.paneles.DAOPanelesImp;
+import integracion.personal.DAOEmpleado;
+import integracion.personal.DAOEmpleadoImp;
 import integracion.vuelos.DAOAvionImp;
 import integracion.vuelos.DAOVueloImp;
 import integracion.vuelos.DAOAvion;
@@ -39,6 +41,10 @@ public DAOAvion nuevoDAOAvion() {
 
 public DAOPaneles nuevoDAOPaneles()	{
 	return new DAOPanelesImp();
+}
+
+public DAOEmpleado nuevoDAOEmpleado()	{
+	return new DAOEmpleadoImp();
 }
 
 }

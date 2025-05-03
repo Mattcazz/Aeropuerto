@@ -22,9 +22,9 @@ public class ControladorImp extends Controlador {
 				JFrame marco = (JFrame) datos;
 				
 				marco.setVisible(false);
-//	            personal.presentacion.CUs.GUIMenuCUsImp menu = (personal.presentacion.CUs.GUIMenuCUsImp) personal.presentacion.CUs.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+	            presentacion.personal.CUs.GUIMenuCUs menu = (presentacion.personal.CUs.GUIMenuCUs) new presentacion.personal.CUs.GUIMenuCUs();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 	
