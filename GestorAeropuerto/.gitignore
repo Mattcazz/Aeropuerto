@@ -1,0 +1,16 @@
+# Ignore build output directories
+/bin/
+/target/
+*.zip
+
+# Eclipse is cancer
+/.metadata/
+/.settings/
+
+# Ignore compiled Java files
+*.class
+
+# Ignore OS-specific files
+.DS_Store
+*.log
+*.tmp
