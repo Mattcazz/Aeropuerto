@@ -1,0 +1,11 @@
+package negocio.incidencias;
+
+public class SolucionVueloStrategy implements SolucionStrategy {
+
+    @Override
+    public void aplicarSolucion(TransferIncidencia incidencia, String solucionSeleccionada, float compensacion) {
+        incidencia.setSolucion(solucionSeleccionada);
+        incidencia.setCompensacion(compensacion);
+        incidencia.setEstado(EstadoIncidencia.RESUELTA);
+    }
+}

@@ -1,5 +1,7 @@
 package integracion;
 
+import integracion.incidencias.DAOIncidencia;
+import integracion.incidencias.DAOIncidenciaImp;
 import integracion.locales.DAOLocales;
 import integracion.locales.DAOLocalesImp;
 import integracion.operaciones.DAOAsignacion;
@@ -52,6 +54,10 @@ public DAOEmpleado nuevoDAOEmpleado()	{
 
 public DAOLocales crearDAOLocales() {
     return new DAOLocalesImp();
+}
+
+public DAOIncidencia nuevoDAOIncidencia() {
+	return new DAOIncidenciaImp();
 }
 
 }

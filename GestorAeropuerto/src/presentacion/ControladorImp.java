@@ -61,10 +61,10 @@ public class ControladorImp extends Controlador {
 			case SUB_INCIDENCIAS: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
-//	            incidencias.presentacion.CUs.GUIMenuCUsImp menu = (incidencias.presentacion.CUs.GUIMenuCUsImp) incidencias.presentacion.CUs.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+				marco.setVisible(false);
+	            presentacion.incidencias.CUs.GUIMenuCUsImp menu = (presentacion.incidencias.CUs.GUIMenuCUsImp) presentacion.incidencias.CUs.GUIMenuCUs.getInstancia();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 	
