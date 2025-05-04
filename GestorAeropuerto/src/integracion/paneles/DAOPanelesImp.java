@@ -26,7 +26,8 @@ public class DAOPanelesImp implements DAOPaneles {
 		
 		List<TransferInfoVuelos> listaInfoVuelos = new ArrayList<>();
 		
-		String query = "SELECT A.vueloid, A.puertaid, A.hora_llegada, A.hora_salida, P.terminal, V.avionid, V.origen, V.destino, V.aerolinea  FROM asignacion A JOIN puerta P ON A.puertaid = P.puertaid JOIN vuelo V ON A.vueloid = V.vueloid;";
+		String query = "SELECT A.vueloid, A.puertaid, A.hora_llegada, A.hora_salida, P.terminal, V.avionid, V.origen, V.destino, Av.aerolinea  FROM asignacion A JOIN puerta P ON A.puertaid = P.puertaid JOIN vuelo V ON A.vueloid = V.vueloid"
+				+ " JOIN avion Av ON Av.avionid = V.avionid;";
 	
 		try(Connection conn = DbConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(query)) {
