@@ -32,11 +32,11 @@ public class GUICrearVueloImp extends GUICrearVuelo {
 
     private List<String> aviones;
 
-    public GUICrearVueloImp() {
-        frame = new JFrame("Crear Vuelo");
-    }
+    public GUICrearVueloImp() { }
     
     public void init(List<String> avionIds) {
+        frame = new JFrame("Crear Vuelo");
+        
     	this.aviones = new ArrayList<String>(avionIds);
     	
         initComponents();

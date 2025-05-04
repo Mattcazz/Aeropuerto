@@ -24,11 +24,11 @@ public class GUIModificarVueloImp extends GUIModificarVuelo {
     private JButton eliminarButton;
     private List<TransferVuelo> vuelos;
 
-    public GUIModificarVueloImp() {
-        frame = new JFrame("Modificar Vuelo");
-    }
+    public GUIModificarVueloImp() { }
 
     public void init(List<TransferVuelo> vuelos) {
+        frame = new JFrame("Modificar Vuelo");
+        
         this.vuelos = new ArrayList<>(vuelos);
 
         initComponents();
