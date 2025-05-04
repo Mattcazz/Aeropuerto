@@ -33,14 +33,9 @@ public class SAVuelosImp implements SAVuelos {
 	@Override
 	public boolean eliminarVuelo(String vueloId) {
 		DAOVuelo daoVuelos = this.factoriaDAO.nuevoDAOVuelo();
+		VueloEliminado.publish(vueloId);
 		
-		if (daoVuelos.eliminarVuelo(vueloId)) {
-			VueloEliminado.publish(vueloId);
-			
-			return (true);
-		}
-		
-		return (false);
+		return (daoVuelos.eliminarVuelo(vueloId));
 	}
 	
 	@Override
