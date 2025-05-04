@@ -29,12 +29,12 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		buttonsPanel.setLayout(new GridLayout(3, 3, 10, 10));
 		buttonsPanel.setPreferredSize(new Dimension(500, 250));
 		
-		JButton CrearVueloButton = new JButton("Crear Vuelo");
-		JButton ActualizarVueloButton = new JButton("Actualizar Vuelo");
-		JButton EliminarVueloButton = new JButton("Eliminar Vuelo");
-		JButton BuscarVueloButton = new JButton("Buscar Vuelo");
+		JButton crearVueloButton = new JButton("Crear Vuelo");
+		JButton modificarVueloButton = new JButton("Actualizar Vuelo");
+		JButton buscarVueloButton = new JButton("Buscar Vuelo");
 		
-		JButton CrearAvionButton = new JButton("Crear Avion");
+		JButton crearAvionButton = new JButton("Crear Avion");
+		JButton modificarAvionButton = new JButton("Actualizar Avion");
 		
 		 JButton salirBtn = new JButton("Salir");
 	     salirBtn.addActionListener(e -> {
@@ -42,12 +42,12 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 	        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
 	        });
 		
-		buttonsPanel.add(CrearVueloButton);
-		buttonsPanel.add(ActualizarVueloButton);
-		buttonsPanel.add(EliminarVueloButton);
-		buttonsPanel.add(BuscarVueloButton);
-		
-		buttonsPanel.add(CrearAvionButton);
+		buttonsPanel.add(crearVueloButton);
+		buttonsPanel.add(modificarVueloButton);
+		buttonsPanel.add(buscarVueloButton);
+
+		buttonsPanel.add(crearAvionButton);
+		buttonsPanel.add(modificarAvionButton);
 
 		buttonsPanel.add(salirBtn);
 		
@@ -58,33 +58,33 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		marco.pack();
 		
 					
-		CrearVueloButton.addActionListener(new ActionListener() { 
+		crearVueloButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_CREAR_VUELO, null);
 			}
 		});
 		
-		ActualizarVueloButton.addActionListener(new ActionListener() { 
+		modificarVueloButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
-				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_ACTUALIZAR_VUELO, null);
+				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_MODIFICAR_VUELO, null);
 			}
 		});
 		
-		EliminarVueloButton.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_ELIMINAR_VUELO, null);
-			}
-		});
-		
-		BuscarVueloButton.addActionListener(new ActionListener() { 
+		buscarVueloButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_BUSCAR_VUELO, null);
 			}
 		});
 		
-		CrearAvionButton.addActionListener(new ActionListener() { 
+		crearAvionButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent e) {
 				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_CREAR_AVION, null);
+			}
+		});
+		
+		modificarAvionButton.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_MODIFICAR_AVION, null);
 			}
 		});
 		
@@ -94,16 +94,7 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 	
 	
 	//m�todo actualizar de la vista
-	public void actualizar(Eventos evento, Object datos) {
-//		switch (evento)		{
-//		case (Eventos.CLIENTES_LIMPIAR): { 
-//			                               campo3.setText(null);
-//										   campo4.setText(null);
-//										   marco.setVisible(true);
-//										  break;
-//										 }
-//		}
-	};
+	public void actualizar(Eventos evento, Object datos) { };
 	
 	public JFrame getFrame() {
 		return marco;

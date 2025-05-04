@@ -1,9 +1,11 @@
 package negocio.vuelos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import integracion.vuelos.DAOAvion;
 import integracion.vuelos.DAOVuelo;
+import negocio.vuelos.event.AvionEliminado;
 import integracion.FactoriaDAO;
 import integracion.FactoriaDAOImp;
 
@@ -13,38 +15,85 @@ public class SAAvionesImp implements SAAviones {
 	@Override
 	public boolean crearAvion(String avionId, double altura, double anchura, double longitud,
 	int maxPasajeros, double peso, String aerolinea) {
-		DAOAvion daoAviones = this.factoriaDAO.nuevoDAOAvion();
+		DAOAvion daoAvion = this.factoriaDAO.nuevoDAOAvion();
 		TransferAvion transferAvion = new TransferAvion(avionId, altura, anchura, longitud, maxPasajeros, peso, aerolinea);
 		
-		return (daoAviones.insertarAvion(transferAvion));
+		return (daoAvion.insertarAvion(transferAvion));
 	}
 
 	@Override
 	public boolean actualizarAvion(String avionId, double altura, double anchura, double longitud,
 			int maxPasajeros, double peso, String aerolinea) {
-		DAOAvion daoAviones = this.factoriaDAO.nuevoDAOAvion();
+		DAOAvion daoAvion = this.factoriaDAO.nuevoDAOAvion();
 		TransferAvion transferAvion = new TransferAvion(avionId, altura, anchura, longitud, maxPasajeros, peso, aerolinea);
 		
-		return (daoAviones.actualizarAvion(transferAvion));
+		return (daoAvion.actualizarAvion(transferAvion));
 	}
 
 	@Override
 	public boolean eliminarAvion(String avionId) {
-		DAOAvion daoAviones = this.factoriaDAO.nuevoDAOAvion();
+		DAOAvion daoAvion = this.factoriaDAO.nuevoDAOAvion();
+		AvionEliminado.publish(avionId);
 		
-		return (daoAviones.eliminarAvion(avionId));
+		return (daoAvion.eliminarAvion(avionId));
 	}
-
-	@Override
-	public List<String> getAllAvionIds() {
-		DAOAvion daoAviones = this.factoriaDAO.nuevoDAOAvion();
+	
+	public TransferAvion getAvion(String avionId) {
+		DAOAvion daoAvion = this.factoriaDAO.nuevoDAOAvion();
 		
-		return (daoAviones.getAllAvionIds());
+		return (daoAvion.getAvion(avionId));
+	}
+	
+	public List<TransferAvion> getAllAviones() {
+		DAOAvion daoAvion = this.factoriaDAO.nuevoDAOAvion();
+		
+		List<TransferAvion> aviones = daoAvion.getAllAviones();
+		if (aviones == null) {
+			// Devolvemos una lista vacia en vez de null
+			return (new ArrayList<TransferAvion>());
+		}
+		return (aviones);
+	}
+	
+	private boolean isValidAvionId(String avionId) {
+		return (avionId.matches("[0-9A-Z]+"));
 	}
 	
 	@Override
-	public String checkAvion(String avionId, double altura, double anchura, double longitud,
-			int maxPasajeros, double peso, String aerolinea) {
-		return (null);
+	public String checkAvion(String avionId, String altura, String anchura, String longitud,
+			String maxPasajeros, String peso, String aerolinea) {
+		DAOAvion daoAvion = this.factoriaDAO.nuevoDAOAvion();
+		// Comprobar que el ID tiene el formato correcto
+		if (!this.isValidAvionId(avionId)) {
+			return ("VueloID solo puede contener A-Z y 0-9");
+		}
+			
+		// Comprobar que un vuelo con este ID no existe ya
+		TransferAvion transferAvion = daoAvion.getAvion(avionId);
+		if (transferAvion != null) {
+			return ("Un avion con este ID ya existe!");
+		}
+			
+		// Comprobar que las dimensiones y el peso son Doubles validos
+		try {
+			Double.parseDouble(altura);
+			Double.parseDouble(anchura);
+			Double.parseDouble(longitud);
+			Double.parseDouble(peso);
+		}
+		catch (NumberFormatException e) {
+			return ("Los campos [Altura, Anchura, Longitud, Peso] deben contener numeros validos\nUse el formato `1234.56`");
+		}
+		
+		// Comprobar que Max Pasajeroses un numero valido
+		try {
+			Integer.parseInt(maxPasajeros);
+		}
+		catch (NumberFormatException e) {
+			return ("Max Pasajeros debe contener un numero valido sin decimales");
+		}
+		
+
+		return null;
 	}
 }

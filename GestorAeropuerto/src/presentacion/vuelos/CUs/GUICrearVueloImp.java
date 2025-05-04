@@ -17,16 +17,16 @@ import java.util.List;
 
 public class GUICrearVueloImp extends GUICrearVuelo {
 	private JFrame frame;
-    private JTextField txtVueloID;
-    private JComboBox<String> cmbAvionID;
-    private JTextField txtOrigen;
-    private JTextField txtDestino;
-    private JComboBox<String> cmbSalidaHora;
-    private JComboBox<String> cmbSalidaMinuto;
-    private JComboBox<String> cmbAterrizajeHora;
-    private JComboBox<String> cmbAterrizajeMinuto;
-    private JComboBox<String> cmbTipo;
-    private JCheckBox chkVIP;
+    private JTextField textVueloID;
+    private JComboBox<String> comboAvionID;
+    private JTextField textOrigen;
+    private JTextField textDestino;
+    private JComboBox<String> comboSalidaHora;
+    private JComboBox<String> comboSalidaMinuto;
+    private JComboBox<String> comboAterrizajeHora;
+    private JComboBox<String> comboAterrizajeMinuto;
+    private JComboBox<String> comboTipo;
+    private JCheckBox checkVIP;
     private JButton volverButton;
     private JButton crearButton;
 
@@ -48,94 +48,94 @@ public class GUICrearVueloImp extends GUICrearVuelo {
 
     private void initComponents() {
         JPanel panel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        GridBagConstraints contraints = new GridBagConstraints();
+        contraints.insets = new Insets(5, 5, 5, 5);
+        contraints.fill = GridBagConstraints.HORIZONTAL;
 
         // Vuelo ID
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        panel.add(new JLabel("Vuelo ID:"), gbc);
-        gbc.gridx = 1;
-        txtVueloID = new JTextField(15);
-        panel.add(txtVueloID, gbc);
+        contraints.gridx = 0;
+        contraints.gridy = 0;
+        panel.add(new JLabel("Vuelo ID:"), contraints);
+        contraints.gridx = 1;
+        textVueloID = new JTextField(15);
+        panel.add(textVueloID, contraints);
 
         // Avion ID (dropdown)
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        panel.add(new JLabel("Avion ID:"), gbc);
-        gbc.gridx = 1;
-        cmbAvionID = new JComboBox<>(aviones.toArray(new String[0]));
-        panel.add(cmbAvionID, gbc);
+        contraints.gridx = 0;
+        contraints.gridy = 1;
+        panel.add(new JLabel("Avion ID:"), contraints);
+        contraints.gridx = 1;
+        comboAvionID = new JComboBox<>(aviones.toArray(new String[0]));
+        panel.add(comboAvionID, contraints);
 
         // Origen
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        panel.add(new JLabel("Origen:"), gbc);
-        gbc.gridx = 1;
-        txtOrigen = new JTextField(15);
-        panel.add(txtOrigen, gbc);
+        contraints.gridx = 0;
+        contraints.gridy = 2;
+        panel.add(new JLabel("Origen:"), contraints);
+        contraints.gridx = 1;
+        textOrigen = new JTextField(15);
+        panel.add(textOrigen, contraints);
 
         // Destino
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        panel.add(new JLabel("Destino:"), gbc);
-        gbc.gridx = 1;
-        txtDestino = new JTextField(15);
-        panel.add(txtDestino, gbc);
+        contraints.gridx = 0;
+        contraints.gridy = 3;
+        panel.add(new JLabel("Destino:"), contraints);
+        contraints.gridx = 1;
+        textDestino = new JTextField(15);
+        panel.add(textDestino, contraints);
 
         // Salida (hour and minute selectors)
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        panel.add(new JLabel("Hora de Salida:"), gbc);
-        gbc.gridx = 1;
+        contraints.gridx = 0;
+        contraints.gridy = 4;
+        panel.add(new JLabel("Hora de Salida:"), contraints);
+        contraints.gridx = 1;
         JPanel salidaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-        cmbSalidaHora = new JComboBox<>(generateHourOptions());
-        cmbSalidaMinuto = new JComboBox<>(generateMinuteOptions());
-        salidaPanel.add(cmbSalidaHora);
+        comboSalidaHora = new JComboBox<>(generateHourOptions());
+        comboSalidaMinuto = new JComboBox<>(generateMinuteOptions());
+        salidaPanel.add(comboSalidaHora);
         salidaPanel.add(new JLabel(":"));
-        salidaPanel.add(cmbSalidaMinuto);
-        panel.add(salidaPanel, gbc);
+        salidaPanel.add(comboSalidaMinuto);
+        panel.add(salidaPanel, contraints);
 
         // Aterrizaje (hour and minute selectors)
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        panel.add(new JLabel("Hora de Aterrizaje:"), gbc);
-        gbc.gridx = 1;
+        contraints.gridx = 0;
+        contraints.gridy = 5;
+        panel.add(new JLabel("Hora de Aterrizaje:"), contraints);
+        contraints.gridx = 1;
         JPanel aterrizajePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-        cmbAterrizajeHora = new JComboBox<>(generateHourOptions());
-        cmbAterrizajeMinuto = new JComboBox<>(generateMinuteOptions());
-        aterrizajePanel.add(cmbAterrizajeHora);
+        comboAterrizajeHora = new JComboBox<>(generateHourOptions());
+        comboAterrizajeMinuto = new JComboBox<>(generateMinuteOptions());
+        aterrizajePanel.add(comboAterrizajeHora);
         aterrizajePanel.add(new JLabel(":"));
-        aterrizajePanel.add(cmbAterrizajeMinuto);
-        panel.add(aterrizajePanel, gbc);
+        aterrizajePanel.add(comboAterrizajeMinuto);
+        panel.add(aterrizajePanel, contraints);
 
         // Tipo (dropdown)
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        panel.add(new JLabel("Tipo:"), gbc);
-        gbc.gridx = 1;
-        cmbTipo = new JComboBox<>(new String[]{"Domestico", "Internacional"});
-        panel.add(cmbTipo, gbc);
+        contraints.gridx = 0;
+        contraints.gridy = 6;
+        panel.add(new JLabel("Tipo:"), contraints);
+        contraints.gridx = 1;
+        comboTipo = new JComboBox<>(new String[]{"Domestico", "Internacional"});
+        panel.add(comboTipo, contraints);
 
         // VIP (checkbox)
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        panel.add(new JLabel("VIP:"), gbc);
-        gbc.gridx = 1;
-        chkVIP = new JCheckBox();
-        panel.add(chkVIP, gbc);
+        contraints.gridx = 0;
+        contraints.gridy = 7;
+        panel.add(new JLabel("VIP:"), contraints);
+        contraints.gridx = 1;
+        checkVIP = new JCheckBox();
+        panel.add(checkVIP, contraints);
         
         // Buttons panel placed below inputs
-        gbc.gridx = 0;
-        gbc.gridy = 8;
-        gbc.gridwidth = 2;
+        contraints.gridx = 0;
+        contraints.gridy = 8;
+        contraints.gridwidth = 2;
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         volverButton = new JButton("Volver");
         crearButton = new JButton("Crear");
         btnPanel.add(volverButton);
         btnPanel.add(crearButton);
-        panel.add(btnPanel, gbc);
+        panel.add(btnPanel, contraints);
 
         // Assemble components into frame
         frame.getContentPane().setLayout(new BorderLayout());
@@ -171,24 +171,22 @@ public class GUICrearVueloImp extends GUICrearVuelo {
     }
 
     // Getters for retrieving form values
-    public String getVueloId() { return txtVueloID.getText().trim(); }
-    public String getAvionId() { return (String) cmbAvionID.getSelectedItem(); }
-    public String getOrigen() { return txtOrigen.getText().trim(); }
-    public String getDestino() { return txtDestino.getText().trim(); }
+    public String getVueloId() { return textVueloID.getText().trim(); }
+    public String getAvionId() { return (String) comboAvionID.getSelectedItem(); }
+    public String getOrigen() { return textOrigen.getText().trim(); }
+    public String getDestino() { return textDestino.getText().trim(); }
     public LocalDateTime getSalida() {
-    	String hora = (String) cmbSalidaHora.getSelectedItem() + ":" + (String) cmbSalidaMinuto.getSelectedItem();
+    	String hora = (String) comboSalidaHora.getSelectedItem() + ":" + (String) comboSalidaMinuto.getSelectedItem();
         LocalTime time = LocalTime.parse(hora);
-        System.out.println("Salida Time: '" + hora + "' - " + time.toString());
         return LocalDateTime.of(LocalDate.now(), time);
     }
     public LocalDateTime getAterrizaje() {
-    	String hora = (String) cmbAterrizajeHora.getSelectedItem() + ":" + (String) cmbAterrizajeMinuto.getSelectedItem();
+    	String hora = (String) comboAterrizajeHora.getSelectedItem() + ":" + (String) comboAterrizajeMinuto.getSelectedItem();
         LocalTime time = LocalTime.parse(hora);
-        System.out.println("Aterrizaje Time: '" + hora + "' - " + time.toString());
         return LocalDateTime.of(LocalDate.now(), time);
     }
-    public String getTipo() { return (String) cmbTipo.getSelectedItem(); }
-    public boolean getVip() { return chkVIP.isSelected(); }
+    public String getTipo() { return (String) comboTipo.getSelectedItem(); }
+    public boolean getVip() { return checkVIP.isSelected(); }
 
 	@Override
 	public void actualizar(Eventos evento, Object datos) {

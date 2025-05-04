@@ -32,7 +32,6 @@ public class DAOVueloImp implements DAOVuelo {
 	
 	@Override
 	public TransferVuelo getVuelo(String vueloId) {
-		System.out.println("Getting vuelo with ID: '" + vueloId + "'");
 		TransferVuelo avion = null;
 		String query = "SELECT * FROM VUELO WHERE vueloId = ?";
 		
@@ -48,8 +47,7 @@ public class DAOVueloImp implements DAOVuelo {
 			System.out.println("SQLException: " + ex.getMessage()); 
 			return (null);
 		}
-		
-		System.out.println("Got vuelo with ID: '" + vueloId + "'");
+
 		return (avion);
 	}
 	

@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import integracion.vuelos.DAOVuelo;
+import negocio.vuelos.event.ObserverVuelos;
 import negocio.vuelos.event.VueloEliminado;
 import integracion.FactoriaDAO;
 import integracion.FactoriaDAOImp;
 
-public class SAVuelosImp implements SAVuelos {
+public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 	FactoriaDAO factoriaDAO = new FactoriaDAOImp();
 
 	@Override
@@ -36,6 +37,16 @@ public class SAVuelosImp implements SAVuelos {
 		VueloEliminado.publish(vueloId);
 		
 		return (daoVuelos.eliminarVuelo(vueloId));
+	}
+	
+	public void event(String avionId) {
+		List<TransferVuelo> vuelos = this.getAllVuelos();
+		
+		for (TransferVuelo vuelo : vuelos) {
+			if (vuelo.getAvionId() == avionId) {
+				this.eliminarVuelo(vuelo.getVueloId());
+			}
+		}
 	}
 	
 	@Override

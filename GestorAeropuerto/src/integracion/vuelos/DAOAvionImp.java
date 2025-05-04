@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import integracion.DbConnection;
 import negocio.vuelos.TransferAvion;
+import negocio.vuelos.TransferVuelo;
 
 public class DAOAvionImp implements DAOAvion {
 	private TransferAvion getAvionFromRow(ResultSet rs) throws SQLException {	
@@ -26,8 +28,8 @@ public class DAOAvionImp implements DAOAvion {
 	
 	@Override
 	public TransferAvion getAvion(String avion_id) {
-		TransferAvion avion = new TransferAvion();
-		String query = "SELECT * FROM AVION WHERE avionId = ?"; // based
+		TransferAvion avion = null;
+		String query = "SELECT * FROM AVION WHERE avionId = ?";
 		
 		try (Connection conn = DbConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -43,12 +45,31 @@ public class DAOAvionImp implements DAOAvion {
 		
 		return (avion);
 	}
+	
+	@Override
+	public List<TransferAvion> getAllAviones() {
+		String query = "SELECT * FROM AVION";
+		
+		List<TransferAvion> aviones = new LinkedList<TransferAvion>();
+		
+		try (Connection conn = DbConnection.getConnection()) {
+			try (ResultSet rs = conn.createStatement().executeQuery(query)){
+				while (rs.next()) {
+					aviones.add(getAvionFromRow(rs));
+				}
+			}	
+		} catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage()); 
+			return (null);
+		}
+		return (aviones);
+	}
 
 	@Override
 	public boolean insertarAvion(TransferAvion avion) {
 		String query = 
-			    "INSERT INTO AVION (avionId, altura, anchura, longitud, max_pasajeros, peso, aerolinea) " +
-			    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+			    "INSERT INTO AVION (avionId, tiempo_en_puerta, altura, anchura, longitud, max_pasajeros, peso, aerolinea) " +
+			    "VALUES (?, 60, ?, ?, ?, ?, ?, ?)";
 		try (Connection conn = DbConnection.getConnection();
 		PreparedStatement ps = conn.prepareStatement(query)) {
 		    ps.setString(1, avion.getAvionId());

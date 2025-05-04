@@ -2,6 +2,7 @@ package presentacion.vuelos;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -26,32 +27,20 @@ public class ControladorImp extends Controlador {
 				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
 
 				GUICrearVueloImp menu = (GUICrearVueloImp) GUICrearVuelo.getInstancia();
-				List<String> aviones = saAviones.getAllAvionIds();
+				List<TransferAvion> aviones = saAviones.getAllAviones();
+				List<String> avionIds = new ArrayList<String>();
+				for (TransferAvion avion : aviones) {
+					avionIds.add(avion.getAvionId());
+				}
 				// List<String> test = new ArrayList<String>(Arrays.asList("1", "2", "3"));
 				
-				menu.init(aviones);
+				menu.init(avionIds);
 				break;
 			}
-			case ABRIR_MENU_ACTUALIZAR_VUELO: {
+			case ABRIR_MENU_MODIFICAR_VUELO: {
 				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
 
-				GUIActualizarVueloImp menu = (GUIActualizarVueloImp) GUIActualizarVuelo.getInstancia();
-				List<TransferVuelo> vuelos = saVuelos.buscarVuelo(LocalDateTime.now(), false); // Solo nos interesa actualizar vuelos que aun no han salido
-				// List<TransferVuelo> test = new ArrayList<>();
-				// test.add(new TransferVuelo("A9X7B2", "1", "JFK", "LAX", LocalDateTime.of(2025, 5, 1, 10, 30), LocalDateTime.of(2025, 5, 1, 13, 45), "Domestico", true));
-				// test.add(new TransferVuelo("Z3M5K8", "2", "ORD", "ATL", LocalDateTime.of(2025, 5, 1, 8, 0), LocalDateTime.of(2025, 5, 1, 11, 15), "Domestico", false));
-				// test.add(new TransferVuelo("P1L4Q9", "3", "DFW", "CDG", LocalDateTime.of(2025, 5, 1, 17, 20), LocalDateTime.of(2025, 5, 2, 7, 0), "Internacional", true));
-				// test.add(new TransferVuelo("K7T2V6", "2", "SFO", "SEA", LocalDateTime.of(2025, 5, 1, 14, 10), LocalDateTime.of(2025, 5, 1, 15, 45), "Domestico", false));
-				// test.add(new TransferVuelo("M4J9D3", "1", "MIA", "BOG", LocalDateTime.of(2025, 5, 1, 22, 0), LocalDateTime.of(2025, 5, 2, 1, 30), "Internacional", true));
-
-				menu.init(vuelos);
-				break;
-			}
-			case ABRIR_MENU_ELIMINAR_VUELO: {
-				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
-
-				GUIEliminarVueloImp menu = (GUIEliminarVueloImp) GUIEliminarVuelo.getInstancia();
-				
+				GUIModificarVueloImp menu = (GUIModificarVueloImp) GUIModificarVuelo.getInstancia();
 				List<TransferVuelo> vuelos = saVuelos.getAllVuelos();
 				// List<TransferVuelo> test = new ArrayList<>();
 				// test.add(new TransferVuelo("A9X7B2", "1", "JFK", "LAX", LocalDateTime.of(2025, 5, 1, 10, 30), LocalDateTime.of(2025, 5, 1, 13, 45), "Domestico", true));
@@ -113,19 +102,23 @@ public class ControladorImp extends Controlador {
 			case ABRIR_SUBMENU_ACTUALIZAR_VUELO: {
 				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
 
-				GUIActualizarVueloImp daddy = (GUIActualizarVueloImp) datos;
-				GUISubActualizarVueloImp menu = (GUISubActualizarVueloImp) GUISubActualizarVuelo.getInstancia();
+				GUIModificarVueloImp daddy = (GUIModificarVueloImp) datos;
+				GUIActualizarVueloImp menu = (GUIActualizarVueloImp) GUIActualizarVuelo.getInstancia();
 				
-				List<String> aviones = saAviones.getAllAvionIds();
+				List<TransferAvion> aviones = saAviones.getAllAviones();
+				List<String> avionIds = new ArrayList<String>();
+				for (TransferAvion avion : aviones) {
+					avionIds.add(avion.getAvionId());
+				}
 				// List<String> test = new ArrayList<String>(Arrays.asList("1", "2", "3"));
 				
 				TransferVuelo transferVuelo = daddy.getSelectedVuelo();
-				menu.init(transferVuelo, aviones, daddy);
+				menu.init(transferVuelo, avionIds, daddy);
 				break;
 			}
 			case ACTUALIZAR_VUELO: {
 				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
-				GUISubActualizarVueloImp menu = (GUISubActualizarVueloImp) datos;
+				GUIActualizarVueloImp menu = (GUIActualizarVueloImp) datos;
 				
 				String error_message = saVuelos.checkVuelo(
 						menu.getVueloId(),
@@ -166,22 +159,21 @@ public class ControladorImp extends Controlador {
 						menu.getTipo(),
 						menu.getVip()
 				);
-				GUIActualizarVueloImp parent = menu.getParent();
+				GUIModificarVueloImp parent = menu.getParent();
 				parent.actualizar(Eventos.ACTUALIZAR_VUELO, transferVuelo);
 				menu.getFrame().dispose();
 				break;
 			}
 			case ELIMINAR_VUELO: {
 				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
-				GUIEliminarVueloImp menu = (GUIEliminarVueloImp) datos;
+				GUIModificarVueloImp menu = (GUIModificarVueloImp) datos;
 
-				
-				if (!saVuelos.eliminarVuelo(menu.getSelectedVuelo().getVueloId())) {
+				TransferVuelo transferVuelo = menu.getSelectedVuelo();
+				if (!saVuelos.eliminarVuelo(transferVuelo.getVueloId())) {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al eliminar vuelo");
 					break;
 				}
 				
-				TransferVuelo transferVuelo = menu.getSelectedVuelo();
 				menu.actualizar(Eventos.ELIMINAR_VUELO, transferVuelo.getVueloId());
 				break;
 			}
@@ -213,6 +205,21 @@ public class ControladorImp extends Controlador {
 				menu.init();
 				break;
 			}
+			case ABRIR_MENU_MODIFICAR_AVION: {
+				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
+
+				GUIModificarAvionImp menu = (GUIModificarAvionImp) GUIModificarAvion.getInstancia();
+				List<TransferAvion> aviones = saAviones.getAllAviones();
+				// List<TransferVuelo> test = new ArrayList<>();
+				// test.add(new TransferVuelo("A9X7B2", "1", "JFK", "LAX", LocalDateTime.of(2025, 5, 1, 10, 30), LocalDateTime.of(2025, 5, 1, 13, 45), "Domestico", true));
+				// test.add(new TransferVuelo("Z3M5K8", "2", "ORD", "ATL", LocalDateTime.of(2025, 5, 1, 8, 0), LocalDateTime.of(2025, 5, 1, 11, 15), "Domestico", false));
+				// test.add(new TransferVuelo("P1L4Q9", "3", "DFW", "CDG", LocalDateTime.of(2025, 5, 1, 17, 20), LocalDateTime.of(2025, 5, 2, 7, 0), "Internacional", true));
+				// test.add(new TransferVuelo("K7T2V6", "2", "SFO", "SEA", LocalDateTime.of(2025, 5, 1, 14, 10), LocalDateTime.of(2025, 5, 1, 15, 45), "Domestico", false));
+				// test.add(new TransferVuelo("M4J9D3", "1", "MIA", "BOG", LocalDateTime.of(2025, 5, 1, 22, 0), LocalDateTime.of(2025, 5, 2, 1, 30), "Internacional", true));
+
+				menu.init(aviones);
+				break;
+			}
 			case CREAR_AVION: {
 				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
 				
@@ -220,11 +227,11 @@ public class ControladorImp extends Controlador {
 				
 				String error_message = saAviones.checkAvion(
 						menu.getAvionId(),
-						Double.parseDouble(menu.getAltura()),
-						Double.parseDouble(menu.getAnchura()),
-						Double.parseDouble(menu.getLongitud()),
-						Integer.parseInt(menu.getMaxPasajeros()),
-						Double.parseDouble(menu.getPeso()),
+						menu.getAltura(),
+						menu.getAnchura(),
+						menu.getLongitud(),
+						menu.getMaxPasajeros(),
+						menu.getPeso(),
 						menu.getAerolinea()
 			);
 				if (error_message != null) {
@@ -247,6 +254,72 @@ public class ControladorImp extends Controlador {
 				
 				// Cerrar la ventana
 				menu.getFrame().dispose();
+				break;
+			}
+			case ABRIR_SUBMENU_ACTUALIZAR_AVION: {
+				GUIModificarAvionImp daddy = (GUIModificarAvionImp) datos;
+				GUIActualizarAvionImp menu = (GUIActualizarAvionImp) GUIActualizarAvion.getInstancia();
+				
+				TransferAvion transferAvion = daddy.getSelectedAvion();
+				menu.init(transferAvion, daddy);
+				break;
+			}
+			case ACTUALIZAR_AVION: {
+				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
+				GUIActualizarAvionImp menu = (GUIActualizarAvionImp) datos;
+				
+				String error_message = saAviones.checkAvion(
+						menu.getAvionId(),
+						menu.getAltura(),
+						menu.getAnchura(),
+						menu.getLongitud(),
+						menu.getMaxPasajeros(),
+						menu.getPeso(),
+						menu.getAerolinea()
+				);
+				if (error_message != null) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, error_message);
+					break;
+				}
+				
+				if (!saAviones.actualizarAvion(
+						menu.getAvionId(),
+						Double.parseDouble(menu.getAltura()),
+						Double.parseDouble(menu.getAnchura()),
+						Double.parseDouble(menu.getLongitud()),
+						Integer.parseInt(menu.getMaxPasajeros()),
+						Double.parseDouble(menu.getPeso()),
+						menu.getAerolinea()
+				)) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al actualizar avion");
+					break;
+				}
+				
+				TransferAvion transferAvion = new TransferAvion(
+						menu.getAvionId(),
+						Double.parseDouble(menu.getAltura()),
+						Double.parseDouble(menu.getAnchura()),
+						Double.parseDouble(menu.getLongitud()),
+						Integer.parseInt(menu.getMaxPasajeros()),
+						Double.parseDouble(menu.getPeso()),
+						menu.getAerolinea()
+				);
+				GUIModificarAvionImp parent = menu.getParent();
+				parent.actualizar(Eventos.ACTUALIZAR_AVION, transferAvion);
+				menu.getFrame().dispose();
+				break;
+			}
+			case ELIMINAR_AVION: {
+				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
+				GUIModificarAvionImp menu = (GUIModificarAvionImp) datos;
+
+				TransferAvion transferAvion = menu.getSelectedAvion();
+				if (!saAviones.eliminarAvion(transferAvion.getAvionId())) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al eliminar avion");
+					break;
+				}
+				
+				menu.actualizar(Eventos.ELIMINAR_AVION, transferAvion.getAvionId());
 				break;
 			}
 			default: {

@@ -9,11 +9,11 @@ public enum Eventos {
 	// Formato: ABRIR_MENU_[CU]
 	// Ejemplo
 	ABRIR_MENU_CREAR_VUELO,
-	ABRIR_MENU_ACTUALIZAR_VUELO,
-	ABRIR_MENU_ELIMINAR_VUELO,
+	ABRIR_MENU_MODIFICAR_VUELO,
 	ABRIR_MENU_BUSCAR_VUELO,
 	
 	ABRIR_MENU_CREAR_AVION,
+	ABRIR_MENU_MODIFICAR_AVION,
 	
 	// Operaciones CUs
 	// Aqui poner los eventos relacionados con los botones de las pantallas
@@ -31,6 +31,9 @@ public enum Eventos {
 	BUSCAR_VUELO,
 	
 	CREAR_AVION,
+	ABRIR_SUBMENU_ACTUALIZAR_AVION,
+	ACTUALIZAR_AVION,
+	ELIMINAR_AVION,
 	
 	MOSTRAR_MENSAJE,
 	

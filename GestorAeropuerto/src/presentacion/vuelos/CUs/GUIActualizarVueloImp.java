@@ -1,164 +1,230 @@
 package presentacion.vuelos.CUs;
 
+import javax.swing.*;
+
 import negocio.vuelos.TransferVuelo;
 import presentacion.vuelos.ControladorImp;
 import presentacion.vuelos.Eventos;
 
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class GUIActualizarVueloImp extends GUIActualizarVuelo {
-    private JFrame frame;
-    private JTable table;
-    private JButton volverButton;
-    private JButton actualizarButton;
-    private List<TransferVuelo> vuelos;
+	private JFrame frame;
+	private JLabel labelVueloID;
+	private JComboBox<String> comboAvionID;
+	private JTextField textOrigen;
+	private JTextField textDestino;
+	private JComboBox<String> comboSalidaHora;
+	private JComboBox<String> comboSalidaMinuto;
+	private JComboBox<String> comboAterrizajeHora;
+	private JComboBox<String> comboAterrizajeMinuto;
+	private JComboBox<String> comboTipo;
+	private JCheckBox checkboxVip;
+	private JButton volverButton;
+	private JButton actualizarButton;
 
-    public GUIActualizarVueloImp() {
-        frame = new JFrame("Actualizar Vuelo");
-    }
+	private List<String> avionIds;
+	private GUIModificarVueloImp daddy;
 
-    public void init(List<TransferVuelo> vuelos) {
-        this.vuelos = new ArrayList<>(vuelos);
+	public GUIActualizarVueloImp() { }
 
-        initComponents();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
-
-    private void initComponents() {
-        String[] columnNames = {
-            "Vuelo ID", "Avion ID", "Origen", "Destino",
-            "Salida", "Aterrizaje", "Tipo", "VIP"
-        };
-
-		DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
-			@Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
-        for (TransferVuelo vuelo : vuelos) {
-            model.addRow(new Object[]{
-                vuelo.getVueloId(),
-                vuelo.getAvionId(),
-                vuelo.getOrigen(),
-                vuelo.getDestino(),
-                vuelo.getTiempoSalida().toLocalTime().toString(),
-                vuelo.getTiempoAterrizaje().toLocalTime().toString(),
-                vuelo.getTipoVuelo(),
-                vuelo.isVip() ? "SI" : "NO"
-            });
-        }
-
-        table = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Table inside titled panel
-        JPanel tablePanel = new JPanel(new BorderLayout());
-        tablePanel.setBorder(BorderFactory.createTitledBorder("Vuelos"));
-        tablePanel.add(scrollPane, BorderLayout.CENTER);
-
-        // Buttons
-        volverButton = new JButton("Volver");
-        actualizarButton = new JButton("Actualizar");
-        actualizarButton.setEnabled(false);
-
-        volverButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	ControladorImp.getInstancia().accion(Eventos.VOLVER_MENU, GUIActualizarVueloImp.this);
-            }
-        });
-
-        actualizarButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	ControladorImp.getInstancia().accion(Eventos.ABRIR_SUBMENU_ACTUALIZAR_VUELO, GUIActualizarVueloImp.this);
-            }
-        });
-
-        // Enable actualizar button on row selection
-        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting() && table.getSelectedRow() != -1) {
-                    actualizarButton.setEnabled(true);
-                }
-            }
-        });
-
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
-        buttonPanel.add(volverButton);
-        buttonPanel.add(actualizarButton);
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = (int) (screenSize.width * 2 / 3.0);
-        int height = (int) (screenSize.height * 3 / 4.0);
-        frame.setSize(width, height);
-
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.getContentPane().add(tablePanel, BorderLayout.CENTER);
-        frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-    }
-    
-    public TransferVuelo getSelectedVuelo() {
-        int selectedRow = table.getSelectedRow();
-        if (selectedRow == -1) {
-        	return null;
-        }
-        
-        return (vuelos.get(selectedRow));
-    }
-    
-    private void updateRow(TransferVuelo vuelo) {
-        int row = -1;
-        for (TransferVuelo transferVuelo : vuelos) {
-        	if (transferVuelo.getVueloId() == vuelo.getVueloId()) {
-        		row = vuelos.indexOf(transferVuelo);
-        		break;
-        	}
-        }
-        if (row == -1) {
-        	return;
-        }
-
-        vuelos.set(row, vuelo);
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        model.setValueAt(vuelo.getVueloId(), row, 0);
-        model.setValueAt(vuelo.getAvionId(), row, 1);
-        model.setValueAt(vuelo.getOrigen(), row, 2);
-        model.setValueAt(vuelo.getDestino(), row, 3);
-        model.setValueAt(vuelo.getTiempoSalida().toLocalTime().toString(), row, 4);
-        model.setValueAt(vuelo.getTiempoAterrizaje().toLocalTime().toString(), row, 5);
-        model.setValueAt(vuelo.getTipoVuelo(), row, 6);
-        model.setValueAt(vuelo.isVip() ? "SI" : "NO", row, 7);
-    }
-    
-	@Override
-	public void actualizar(Eventos evento, Object datos) {
-		switch (evento) {
-			case ACTUALIZAR_VUELO: {
-				TransferVuelo transferVuelo = (TransferVuelo) datos;
-				
-				this.updateRow(transferVuelo);
-				break;
-			}
-			default:
-				break;
-		}
+	public void init(TransferVuelo currentData, List<String> avionIds, GUIModificarVueloImp daddy) {
+		frame = new JFrame("Actualizar Vuelo");
 		
+		this.avionIds = new ArrayList<String>(avionIds);
+		this.daddy = daddy;
+
+		initComponents(currentData);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+	}
+
+	private void initComponents(TransferVuelo startData) {
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints constraints = new GridBagConstraints();
+		constraints.insets = new Insets(5, 5, 5, 5);
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+
+		// Vuelo ID (label)
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		panel.add(new JLabel("Vuelo ID:"), constraints);
+		constraints.gridx = 1;
+		labelVueloID = new JLabel(startData.getVueloId());
+		panel.add(labelVueloID, constraints);
+
+		// Avion ID (dropdown)
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		panel.add(new JLabel("Avion ID:"), constraints);
+		constraints.gridx = 1;
+		comboAvionID = new JComboBox<>(avionIds.toArray(new String[0]));
+		comboAvionID.setSelectedItem(startData.getAvionId());
+		panel.add(comboAvionID, constraints);
+
+		// Origen
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		panel.add(new JLabel("Origen:"), constraints);
+		constraints.gridx = 1;
+		textOrigen = new JTextField(startData.getOrigen(), 15);
+		panel.add(textOrigen, constraints);
+
+		// Destino
+		constraints.gridx = 0;
+		constraints.gridy = 3;
+		panel.add(new JLabel("Destino:"), constraints);
+		constraints.gridx = 1;
+		textDestino = new JTextField(startData.getDestino(), 15);
+		panel.add(textDestino, constraints);
+
+		// Salida time selectors
+		constraints.gridx = 0;
+		constraints.gridy = 4;
+		panel.add(new JLabel("Hora de Salida:"), constraints);
+		constraints.gridx = 1;
+		JPanel salidaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+		comboSalidaHora = new JComboBox<>(generateHourOptions());
+		comboSalidaMinuto = new JComboBox<>(generateMinuteOptions());
+		comboSalidaHora.setSelectedItem(String.format("%02d", startData.getTiempoSalida().getHour()));
+		comboSalidaMinuto.setSelectedItem(String.format("%02d", startData.getTiempoSalida().getMinute() / 5 * 5));
+		salidaPanel.add(comboSalidaHora);
+		salidaPanel.add(new JLabel(":"));
+		salidaPanel.add(comboSalidaMinuto);
+		panel.add(salidaPanel, constraints);
+
+		// Aterrizaje time selectors
+		constraints.gridx = 0;
+		constraints.gridy = 5;
+		panel.add(new JLabel("Hora de Aterrizaje:"), constraints);
+		constraints.gridx = 1;
+		JPanel aterrizajePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+		comboAterrizajeHora = new JComboBox<>(generateHourOptions());
+		comboAterrizajeMinuto = new JComboBox<>(generateMinuteOptions());
+		comboAterrizajeHora.setSelectedItem(String.format("%02d", startData.getTiempoAterrizaje().getHour()));
+		comboAterrizajeMinuto.setSelectedItem(String.format("%02d", startData.getTiempoAterrizaje().getMinute() / 5 * 5));
+		aterrizajePanel.add(comboAterrizajeHora);
+		aterrizajePanel.add(new JLabel(":"));
+		aterrizajePanel.add(comboAterrizajeMinuto);
+		panel.add(aterrizajePanel, constraints);
+
+		// Tipo
+		constraints.gridx = 0;
+		constraints.gridy = 6;
+		panel.add(new JLabel("Tipo:"), constraints);
+		constraints.gridx = 1;
+		comboTipo = new JComboBox<>(new String[] { "Domestico", "Internacional" });
+		comboTipo.setSelectedItem(startData.getTipoVuelo());
+		panel.add(comboTipo, constraints);
+
+		// VIP
+		constraints.gridx = 0;
+		constraints.gridy = 7;
+		panel.add(new JLabel("VIP:"), constraints);
+		constraints.gridx = 1;
+		checkboxVip = new JCheckBox();
+		checkboxVip.setSelected(startData.isVip());
+		panel.add(checkboxVip, constraints);
+
+		// Buttons
+		constraints.gridx = 0;
+		constraints.gridy = 8;
+		constraints.gridwidth = 2;
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
+		volverButton = new JButton("Volver");
+		actualizarButton = new JButton("Actualizar");
+		buttonPanel.add(volverButton);
+		buttonPanel.add(actualizarButton);
+		panel.add(buttonPanel, constraints);
+
+		// Frame layout
+		frame.getContentPane().setLayout(new BorderLayout());
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
+
+		volverButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControladorImp.getInstancia().accion(Eventos.VOLVER_MENU, GUIActualizarVueloImp.this);
+			}
+		});
+
+		actualizarButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControladorImp.getInstancia().accion(Eventos.ACTUALIZAR_VUELO, GUIActualizarVueloImp.this);
+			}
+		});
+	}
+
+	private String[] generateHourOptions() {
+		String[] hours = new String[24];
+		for (int i = 0; i < 24; i++) {
+			hours[i] = String.format("%02d", i);
+		}
+		return hours;
+	}
+
+	private String[] generateMinuteOptions() {
+		String[] minutes = new String[12];
+		for (int i = 0; i < 60; i += 5) {
+			minutes[i / 5] = String.format("%02d", i);
+		}
+		return minutes;
+	}
+
+	// Getters for retrieving form values
+	public String getVueloId() {
+		return labelVueloID.getText().trim();
+	}
+
+	public String getAvionId() {
+		return (String) comboAvionID.getSelectedItem();
+	}
+
+	public String getOrigen() {
+		return textOrigen.getText().trim();
+	}
+
+	public String getDestino() {
+		return textDestino.getText().trim();
+	}
+
+	public LocalDateTime getSalida() {
+		String hora = (String) comboSalidaHora.getSelectedItem() + ":" + (String) comboSalidaMinuto.getSelectedItem();
+		LocalTime time = LocalTime.parse(hora);
+		return LocalDateTime.of(LocalDate.now(), time);
+	}
+
+	public LocalDateTime getAterrizaje() {
+		String hora = (String) comboAterrizajeHora.getSelectedItem() + ":" + (String) comboAterrizajeMinuto.getSelectedItem();
+		LocalTime time = LocalTime.parse(hora);
+		return LocalDateTime.of(LocalDate.now(), time);
+	}
+
+	public String getTipo() {
+		return (String) comboTipo.getSelectedItem();
+	}
+
+	public boolean getVip() {
+		return checkboxVip.isSelected();
 	}
 	
+	public GUIModificarVueloImp getParent() {
+		return (this.daddy);
+	}
+
+	@Override
+	public void actualizar(Eventos evento, Object datos) {
+
+	}
+
 	public JFrame getFrame() {
 		return (this.frame);
 	}
