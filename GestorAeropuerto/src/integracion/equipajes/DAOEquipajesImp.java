@@ -14,16 +14,7 @@ import negocio.equipajes.TransferEquipaje;
 
 public class DAOEquipajesImp implements DAOEquipajes {
 	
-	private Connection conexion;
-	
-	public DAOEquipajesImp() {
-		try {
-			this.conexion = DbConnection.getConnection();
-		}
-		catch (SQLException e) {
-			System.out.println("Error al hacer conexion a la BBDD");
-		}
-	}
+	public DAOEquipajesImp() { }
 	
 	
 	@Override
@@ -31,7 +22,8 @@ public class DAOEquipajesImp implements DAOEquipajes {
 		// TODO Auto-generated method stub
 		String sentencia = "INSERT INTO equipajes (id_vuelo, peso) VALUES (?,?)";
 		
-		try (PreparedStatement stmt = conexion.prepareStatement(sentencia)){
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sentencia)){
 			stmt.setString(1, equ.getIdVuelo());
 			stmt.setDouble(2, equ.getPeso());
 			int rs = stmt.executeUpdate();
@@ -50,7 +42,8 @@ public class DAOEquipajesImp implements DAOEquipajes {
 
 		String sentencia= "SELECT id, id_vuelo, peso FROM equipajes WHERE id_vuelo = ?";
 		
-		try (PreparedStatement stmt = conexion.prepareStatement(sentencia)){
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sentencia)){
 			stmt.setString(1, id_vuelo);
 			ResultSet rs = stmt.executeQuery();
 			
@@ -74,7 +67,8 @@ public class DAOEquipajesImp implements DAOEquipajes {
 	public void modificarEquipaje(TransferEquipaje equ) {
 		// TODO Auto-generated method stub
 		String sentencia = "UPDATE equipajes SET peso = ? WHERE id = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sentencia)){
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sentencia)){
 			stmt.setDouble(1, equ.getPeso());
 			stmt.setInt(2, equ.getId());
 			int rs = stmt.executeUpdate();
@@ -89,7 +83,8 @@ public class DAOEquipajesImp implements DAOEquipajes {
 	public void eliminarEquipaje(TransferEquipaje equ) {
 		// TODO Auto-generated method stub
 		String sentencia = "DELETE FROM equipajes WHERE id = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sentencia)){
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sentencia)){
 			stmt.setInt(1, equ.getId());
 			int rs = stmt.executeUpdate();
 			
