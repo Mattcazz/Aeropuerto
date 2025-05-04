@@ -98,45 +98,57 @@ public class GUISeleccionarDatosImp extends GUISeleccionarDatos {
 		
 		funcButton.addActionListener(new ActionListener()	{ 
 			public void actionPerformed(ActionEvent e){
-				GUIAñadirDatos gui = GUIAñadirDatos.getInstancia();
-				   
-                if (filaSeleccionada != -1) {
-               	 TransferInfoVuelos transfer = new TransferInfoVuelos();
-                    
-                    boolean añadir = true;
-                    for (int i = 0; i < datos_mostrados.size(); i++) {
-                   	 if (table.getValueAt(filaSeleccionada, 0).equals(datos_mostrados.get(i).getVuelo())) {
-                   		 añadir = false;
-                   	 }
-                    }
-                    
-                    if (añadir) {
-                    	vuelos_añadidos_nuevos.add((String) table.getValueAt(filaSeleccionada, 0));
-                    	
-						transfer.setPanel(Integer.parseInt(String.valueOf(combobox.getSelectedItem())));
-                    	transfer.setVuelo((String) table.getValueAt(filaSeleccionada, 0));
-   	                 	transfer.setHora_llegada((LocalTime) table.getValueAt(filaSeleccionada, 1)); 
-   	                 	transfer.setHora_salida((LocalTime) table.getValueAt(filaSeleccionada, 2));
-   	                 	transfer.setTerminal((int) table.getValueAt(filaSeleccionada, 3));
-   	                 	transfer.setPuerta((int) table.getValueAt(filaSeleccionada, 4)); 
-						transfer.setOrigen((String) table.getValueAt(filaSeleccionada, 5));
-						transfer.setDestino((String) table.getValueAt(filaSeleccionada, 6));
-						transfer.setAvion((String) table.getValueAt(filaSeleccionada, 7));
-						transfer.setAerolinea((String) table.getValueAt(filaSeleccionada, 8));
-                    	
-   	                 	datos_mostrados.add(transfer);
-                    }
-                    
-                    else {
-                      	 Controlador.getInstancia().accion(Eventos.DATOS_YA_EXISTENTES, null);
-                    }
-                    filaSeleccionada = -1;
-                }
-                else {
-               	 Controlador.getInstancia().accion(Eventos.SIN_DATOS, GUIAñadirDatos.getInstancia());
-                }
-                
-				gui.actualizar(Eventos.FUNCIONALIDAD, datos_mostrados);
+				
+				GUIMostrarDatosImp menu_aux = (GUIMostrarDatosImp) GUIMostrarDatos.getInstancia();
+				JFrame menuFrame = menu_aux.getFrame();
+				menuFrame.setVisible(false);
+				
+				if (!(menu_aux.id_paneles_existentes().isEmpty())) {
+				
+					GUIAñadirDatos gui = GUIAñadirDatos.getInstancia();
+					   
+	                if (filaSeleccionada != -1) {
+	               	 TransferInfoVuelos transfer = new TransferInfoVuelos();
+	                    
+	                    boolean añadir = true;
+	                    for (int i = 0; i < datos_mostrados.size(); i++) {
+		                   	 if (table.getValueAt(filaSeleccionada, 0).equals(datos_mostrados.get(i).getVuelo())) {
+		                   		 añadir = false;
+		                   	 }
+	                    }
+	                    
+	                    if (añadir) {
+	                    	vuelos_añadidos_nuevos.add((String) table.getValueAt(filaSeleccionada, 0));
+	                    	
+							transfer.setPanel(Integer.parseInt(String.valueOf(combobox.getSelectedItem())));
+	                    	transfer.setVuelo((String) table.getValueAt(filaSeleccionada, 0));
+	   	                 	transfer.setHora_llegada((LocalTime) table.getValueAt(filaSeleccionada, 1)); 
+	   	                 	transfer.setHora_salida((LocalTime) table.getValueAt(filaSeleccionada, 2));
+	   	                 	transfer.setTerminal((int) table.getValueAt(filaSeleccionada, 3));
+	   	                 	transfer.setPuerta((int) table.getValueAt(filaSeleccionada, 4)); 
+							transfer.setOrigen((String) table.getValueAt(filaSeleccionada, 5));
+							transfer.setDestino((String) table.getValueAt(filaSeleccionada, 6));
+							transfer.setAvion((String) table.getValueAt(filaSeleccionada, 7));
+							transfer.setAerolinea((String) table.getValueAt(filaSeleccionada, 8));
+	                    	
+	   	                 	datos_mostrados.add(transfer);
+	                    }
+	                    
+	                    else {
+	                      	 Controlador.getInstancia().accion(Eventos.DATOS_YA_EXISTENTES, null);
+	                    }
+	                    filaSeleccionada = -1;
+	                }
+	                else {
+	               	 Controlador.getInstancia().accion(Eventos.SIN_DATOS, GUIAñadirDatos.getInstancia());
+	                }
+	                
+					gui.actualizar(Eventos.FUNCIONALIDAD, datos_mostrados);
+				
+				}
+				else {
+	               	 Controlador.getInstancia().accion(Eventos.SIN_PANELES, null);
+				}
 			}
 		});
 		

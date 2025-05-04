@@ -29,7 +29,7 @@ public class GUIMenuSubsistemasImp extends GUIMenuSubsistemas {
             Eventos.SUB_PANELES, Eventos.SUB_PERSONAL, Eventos.SUB_EQUIPAJE,
             Eventos.SUB_OPERACIONES, Eventos.SUB_FINANCIERA, Eventos.SUB_INCIDENCIAS,
             Eventos.SUB_LOCALES, Eventos.SUB_ESTACIONAMIENTO, Eventos.SUB_VUELOS,
-            Eventos.SUB_SEGURIDAD
+            Eventos.SUB_SEGURIDAD, Eventos.ABANDONAR
         };
 
         for (Eventos evento : eventos) {

@@ -1,6 +1,5 @@
 package presentacion.paneles.CUs;
 
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -133,8 +132,11 @@ public class GUIAñadirDatosImp extends GUIAñadirDatos {
 		cancelButton.addActionListener(new ActionListener() { 
 		    public void actionPerformed(ActionEvent e){
 		    	
-		    	GUISeleccionarDatos gui_aux = GUISeleccionarDatos.getInstancia();
+		    	GUISeleccionarDatos gui_aux = (GUISeleccionarDatosImp) GUISeleccionarDatos.getInstancia();
+				JFrame menuFrame = gui_aux.getFrame();
+				menuFrame.setVisible(false);
 				List<TransferInfoVuelos> lista_aux = gui_aux.get_datos_mostrados();
+				
 				
 				for (int x = 0; x < vuelos_añadidos.size();x++) {
 					boolean found = false;

@@ -45,16 +45,6 @@ public class ControladorImp extends Controlador {
 		
 		switch (evento) {
 
-		case (Eventos.ACEPTAR_CAMBIOS): {
-			JOptionPane.showMessageDialog(null, "Se aceptarían los cambios");
-			break;
-		}
-		
-		case (Eventos.CANCELAR_CAMBIOS): {
-			JOptionPane.showMessageDialog(null, "Se cancelarían los cambios");
-			break;
-		}
-		
 		case (Eventos.AÑADIR_DATOS): {
 			GUISeleccionarDatos gui = GUISeleccionarDatosImp.getInstancia();
 			SAPaneles saPaneles =  FactoriaSA.getInstancia().nuevoSAPaneles();
@@ -246,9 +236,11 @@ public class ControladorImp extends Controlador {
 			break;
 		}
 		
-		
+		case (Eventos.SIN_PANELES): {
+			JOptionPane.showMessageDialog(null, "No existe ningún panel al que añadir los datos");
+			break;
+		}
 
-		default: { GUIAñadirDatos.getInstancia().actualizar(Eventos.CLIENTES_LIMPIAR, null); break; }
 		}
 	}
 }
