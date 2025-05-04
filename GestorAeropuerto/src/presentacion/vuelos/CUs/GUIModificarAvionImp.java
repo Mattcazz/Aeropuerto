@@ -184,6 +184,7 @@ public class GUIModificarAvionImp extends GUIModificarAvion {
 				String avionId = (String) datos;
 				
 				this.eliminarAvion(avionId);
+				this.actualizarButton.setEnabled(false);
 				this.eliminarButton.setEnabled(false);
 				break;
 			}

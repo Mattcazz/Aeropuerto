@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import integracion.vuelos.DAOVuelo;
+import negocio.vuelos.event.AvionEliminado;
 import negocio.vuelos.event.ObserverVuelos;
 import negocio.vuelos.event.VueloEliminado;
 import integracion.FactoriaDAO;
@@ -12,6 +13,10 @@ import integracion.FactoriaDAOImp;
 
 public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 	FactoriaDAO factoriaDAO = new FactoriaDAOImp();
+	
+	public SAVuelosImp() {
+		AvionEliminado.subscribe(this);
+	}
 
 	@Override
 	public boolean crearVuelo(String vueloId, String avionId, String origen, String destino, LocalDateTime tiempoSalida,
@@ -40,10 +45,13 @@ public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 	}
 	
 	public void event(String avionId) {
+		System.out.println("SAVuelosImp: AvionEliminado - " + avionId);
 		List<TransferVuelo> vuelos = this.getAllVuelos();
 		
 		for (TransferVuelo vuelo : vuelos) {
-			if (vuelo.getAvionId() == avionId) {
+			System.out.println("AvionIDs: '" + vuelo.getAvionId() + "' - '" + avionId + "'");
+			if (vuelo.getAvionId().equals(avionId)) {
+				System.out.println("Eliminando vuelo '" + vuelo.getVueloId() + "'");
 				this.eliminarVuelo(vuelo.getVueloId());
 			}
 		}
