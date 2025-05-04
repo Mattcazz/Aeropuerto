@@ -14,9 +14,9 @@ public class VueloEliminado {
 		VueloEliminado.subscribers.remove(subscriber);
 	}
 	
-	public static void publish() {
+	public static void publish(String vueloId) {
 		for (ObserverVuelos observer : VueloEliminado.subscribers) {
-			observer.event();
+			observer.event(vueloId);
 		}
 	}
 

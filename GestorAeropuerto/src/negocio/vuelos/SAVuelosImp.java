@@ -35,7 +35,7 @@ public class SAVuelosImp implements SAVuelos {
 		DAOVuelo daoVuelos = this.factoriaDAO.nuevoDAOVuelo();
 		
 		if (daoVuelos.eliminarVuelo(vueloId)) {
-			VueloEliminado.publish();
+			VueloEliminado.publish(vueloId);
 			
 			return (true);
 		}
