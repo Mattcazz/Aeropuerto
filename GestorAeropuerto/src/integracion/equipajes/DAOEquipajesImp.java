@@ -20,7 +20,7 @@ public class DAOEquipajesImp implements DAOEquipajes {
 	@Override
 	public void anadirEquipaje(TransferEquipaje equ) {
 		// TODO Auto-generated method stub
-		String sentencia = "INSERT INTO equipajes (id_vuelo, peso) VALUES (?,?)";
+		String sentencia = "INSERT INTO equipaje (id_vuelo, peso) VALUES (?,?)";
 		
 		try (Connection conn = DbConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sentencia)){
@@ -40,7 +40,7 @@ public class DAOEquipajesImp implements DAOEquipajes {
 		// TODO Auto-generated method stub
 		List<TransferEquipaje> lista=new ArrayList<>();
 
-		String sentencia= "SELECT id, id_vuelo, peso FROM equipajes WHERE id_vuelo = ?";
+		String sentencia= "SELECT id, id_vuelo, peso FROM equipaje WHERE id_vuelo = ?";
 		
 		try (Connection conn = DbConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sentencia)){
@@ -66,7 +66,7 @@ public class DAOEquipajesImp implements DAOEquipajes {
 	@Override
 	public void modificarEquipaje(TransferEquipaje equ) {
 		// TODO Auto-generated method stub
-		String sentencia = "UPDATE equipajes SET peso = ? WHERE id = ?";
+		String sentencia = "UPDATE equipaje SET peso = ? WHERE id = ?";
 		try (Connection conn = DbConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sentencia)){
 			stmt.setDouble(1, equ.getPeso());
@@ -82,7 +82,7 @@ public class DAOEquipajesImp implements DAOEquipajes {
 	@Override
 	public void eliminarEquipaje(TransferEquipaje equ) {
 		// TODO Auto-generated method stub
-		String sentencia = "DELETE FROM equipajes WHERE id = ?";
+		String sentencia = "DELETE FROM equipaje WHERE id = ?";
 		try (Connection conn = DbConnection.getConnection();
 		PreparedStatement stmt = conn.prepareStatement(sentencia)){
 			stmt.setInt(1, equ.getId());

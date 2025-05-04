@@ -112,6 +112,10 @@ public class ControladorImp extends Controlador {
 				GUIMenuSubsistemas menu = GUIMenuSubsistemas.getInstancia();
 				menu.getFrame().setVisible(true);
 				break;
+				
+			case ABANDONAR:
+				JFrame marco = (JFrame) datos;
+				marco.dispose();
 		}
 	}
 	

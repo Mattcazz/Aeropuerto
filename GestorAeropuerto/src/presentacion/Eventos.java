@@ -11,7 +11,8 @@ public enum Eventos {
 	SUB_ESTACIONAMIENTO,
 	SUB_VUELOS,
 	SUB_SEGURIDAD, 
-	SALIR
+	SALIR,
+	ABANDONAR
 	
 }
 
