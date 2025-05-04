@@ -1,5 +1,7 @@
 package integracion;
 
+import integracion.equipajes.DAOEquipajes;
+import integracion.equipajes.DAOEquipajesImp;
 import integracion.financiera.CuentaBancariaDAO;
 import integracion.financiera.CuentaBancariaDAOImp;
 import integracion.financiera.EmpleadoDAO;
@@ -27,63 +29,68 @@ import integracion.vuelos.DAOVuelo;
 
 public class FactoriaDAOImp extends FactoriaDAO {
 
-@Override
-public DAOPuerta nuevoDAOPuerta() {
-	// TODO Auto-generated method stub
-	return new DAOPuertaImp();
-}
-
-@Override
-public DAOAsignacion nuevoDAOAsignacion() {
-	// TODO Auto-generated method stub
-	return new DAOAsignacionImp();
-}
-
-@Override
-public DAOVuelo nuevoDAOVuelo() {
-	// TODO Auto-generated method stub
-	return new DAOVueloImp();
-}
-
-@Override
-public DAOAvion nuevoDAOAvion() {
-	// TODO Auto-generated method stub
-	return new DAOAvionImp();
-}
-
-public DAOPaneles nuevoDAOPaneles()	{
-	return new DAOPanelesImp();
-}
-
-public DAOEmpleado nuevoDAOEmpleado()	{
-	return new DAOEmpleadoImp();
-}
-
-
-public DAOLocales crearDAOLocales() {
-    return new DAOLocalesImp();
-}
-
-public DAOIncidencia nuevoDAOIncidencia() {
-	return new DAOIncidenciaImp();
-}
-
-
-public CuentaBancariaDAO getCuentaBancariaDAO() {
-    return new CuentaBancariaDAOImp();
-}
-
-public FlujoCajaDAO getFlujoCajaDAO() {
-    return new FlujoCajaDAOImp();
-}
-
-@Override
-public EmpleadoDAO getEmpleadoDAO() {
-    return new EmpleadoDAOImp();
-}
-
-@Override
-public LocalDAO getLocalDAO() {
-    return new LocalDAOImp();
-}
+	@Override
+	public DAOPuerta nuevoDAOPuerta() {
+		// TODO Auto-generated method stub
+		return new DAOPuertaImp();
+	}
+	
+	@Override
+	public DAOAsignacion nuevoDAOAsignacion() {
+		// TODO Auto-generated method stub
+		return new DAOAsignacionImp();
+	}
+	
+	@Override
+	public DAOVuelo nuevoDAOVuelo() {
+		// TODO Auto-generated method stub
+		return new DAOVueloImp();
+	}
+	
+	@Override
+	public DAOAvion nuevoDAOAvion() {
+		// TODO Auto-generated method stub
+		return new DAOAvionImp();
+	}
+	
+	public DAOPaneles nuevoDAOPaneles()	{
+		return new DAOPanelesImp();
+	}
+	
+	public DAOEmpleado nuevoDAOEmpleado()	{
+		return new DAOEmpleadoImp();
+	}
+	
+	
+	public DAOLocales crearDAOLocales() {
+	    return new DAOLocalesImp();
+	}
+	
+	public DAOIncidencia nuevoDAOIncidencia() {
+		return new DAOIncidenciaImp();
+	}
+	
+	
+	public CuentaBancariaDAO getCuentaBancariaDAO() {
+	    return new CuentaBancariaDAOImp();
+	}
+	
+	public FlujoCajaDAO getFlujoCajaDAO() {
+	    return new FlujoCajaDAOImp();
+	}
+	
+	@Override
+	public EmpleadoDAO getEmpleadoDAO() {
+	    return new EmpleadoDAOImp();
+	}
+	
+	@Override
+	public LocalDAO getLocalDAO() {
+	    return new LocalDAOImp();
+	}
+	
+	@Override
+	public DAOEquipajes nuevoDAOEquipajes() {
+		return new DAOEquipajesImp();
+	}
 }

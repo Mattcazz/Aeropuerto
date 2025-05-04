@@ -31,10 +31,10 @@ public class ControladorImp extends Controlador {
 			case SUB_EQUIPAJE: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
-//	            equipaje.presentacion.GUIMenuCUsImp menu = (equipaje.presentacion.GUIMenuCUsImp) equipaje.presentacion.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+				marco.setVisible(false);
+	            presentacion.equipajes.CUs.GUIMenuCUsImp menu = (presentacion.equipajes.CUs.GUIMenuCUsImp) presentacion.equipajes.CUs.GUIMenuCUs.getInstancia();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 	
