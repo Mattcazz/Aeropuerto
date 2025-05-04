@@ -8,23 +8,15 @@ import java.util.List;
 import integracion.DbConnection;
 
 public class EmpleadoDAOImp implements EmpleadoDAO {
-
-    private Connection conexion;
-
-    public EmpleadoDAOImp() {
-    	try {
-			this.conexion = DbConnection.getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}    }
+    public EmpleadoDAOImp() { }
 
     @Override
     public List<TEmpleado> obtener() {
         List<TEmpleado> lista = new ArrayList<>();
         String sql = "SELECT * FROM Empleado WHERE activo = TRUE";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(sql);
+        try (Connection conn = DbConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {

@@ -16,22 +16,13 @@ import negocio.incidencias.TransferIncidencia;
 import negocio.incidencias.TransferIncidenciaEquipaje;
 
 public class DAOIncidenciaImp implements DAOIncidencia {
-
-	private Connection conexion;
-
-	public DAOIncidenciaImp() {
-		try {
-			this.conexion = DbConnection.getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	public DAOIncidenciaImp() { }
 
 	public void guardar(TransferIncidencia i) {
 		String sql = "INSERT INTO Incidencia (id, tipo, fecha, descripcion, estado, solucion, compensacion_economica) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, i.getId());
 			stmt.setString(2, i.getTipoString());
 			stmt.setDate(3, new java.sql.Date(i.getFecha().getTime()));
@@ -49,7 +40,8 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 	public boolean actualizar(TransferIncidencia incidencia) {
 		String sql = "UPDATE Incidencia SET fecha = ?, descripcion = ?, estado = ?, solucion = ?, compensacion_economica = ? WHERE id = ?";
 
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 
 			stmt.setDate(1, incidencia.getFecha());
 			stmt.setString(2, incidencia.getDescripcion());
@@ -69,7 +61,8 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 	@Override
 	public boolean eliminar(String id) {
 		String sql = "DELETE FROM Incidencia WHERE id = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, id);
 			return stmt.executeUpdate() == 1;
 		} catch (SQLException e) {
@@ -81,7 +74,8 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 	@Override
 	public TransferIncidencia buscar(String id) {
 		String sql = "SELECT * FROM Incidencia WHERE id = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, id);
 			try (ResultSet rs = stmt.executeQuery()) {
 				if (rs.next()) {
@@ -98,7 +92,8 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 	public List<TransferIncidencia> listarPorTipo(String tipo) {
 		List<TransferIncidencia> lista = new ArrayList<>();
 		String sql = "SELECT * FROM Incidencia WHERE tipo = ? AND estado = 'no resuelta'";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, tipo);
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
@@ -139,7 +134,8 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 	public List<TransferIncidencia> listarPorEstado(String estado) {
 		List<TransferIncidencia> lista = new ArrayList<>();
 		String sql = "SELECT * FROM Incidencia WHERE estado = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, estado);
 			try (ResultSet rs = stmt.executeQuery()) {
 				while (rs.next()) {
@@ -157,7 +153,8 @@ public class DAOIncidenciaImp implements DAOIncidencia {
 	        List<TransferIncidencia> lista = new ArrayList<>();
 	        String sql = "SELECT * FROM Incidencia WHERE estado = 'resuelta'";
 
-	        try (PreparedStatement stmt = conexion.prepareStatement(sql);
+	        try (Connection conn = DbConnection.getConnection();
+	        PreparedStatement stmt = conn.prepareStatement(sql);
 	             ResultSet rs = stmt.executeQuery()) {
 
 	            while (rs.next()) {

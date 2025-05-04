@@ -12,23 +12,14 @@ import integracion.DbConnection;
 import negocio.financiera.FlujoCaja;
 
 public class FlujoCajaDAOImp implements FlujoCajaDAO {
-
-	private Connection conexion;
-
-	public FlujoCajaDAOImp() {
-		try {
-			this.conexion = DbConnection.getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	public FlujoCajaDAOImp() { }
 
 	@Override
 	public void guardar(FlujoCaja flujo) {
 		String sql = "INSERT INTO flujo_caja (nombre_cuenta, tipo, cantidad, concepto, fecha, estado) "
 				+ "VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, flujo.getNombreCuenta());
 			stmt.setString(2, flujo.getTipo());
 			stmt.setFloat(3, flujo.getCantidad());
@@ -52,7 +43,9 @@ public class FlujoCajaDAOImp implements FlujoCajaDAO {
 		List<FlujoCaja> lista = new ArrayList<>();
 		String sql = "SELECT * FROM flujo_caja ORDER BY fecha DESC";
 
-		try (PreparedStatement stmt = conexion.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery()) {
 
 			while (rs.next()) {
 				FlujoCaja flujo = new FlujoCaja(rs.getInt("id"), rs.getString("nombre_cuenta"), rs.getString("tipo"),
@@ -71,7 +64,8 @@ public class FlujoCajaDAOImp implements FlujoCajaDAO {
 		List<FlujoCaja> lista = new ArrayList<>();
 		String sql = "SELECT * FROM flujo_caja WHERE estado = ? ORDER BY fecha DESC";
 
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, estado);
 			ResultSet rs = stmt.executeQuery();
 
@@ -90,7 +84,8 @@ public class FlujoCajaDAOImp implements FlujoCajaDAO {
 	@Override
 	public FlujoCaja buscarPorId(int id) {
 		String sql = "SELECT * FROM flujo_caja WHERE id = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 
@@ -108,7 +103,8 @@ public class FlujoCajaDAOImp implements FlujoCajaDAO {
 	@Override
 	public void actualizarEstado(int id, String nuevoEstado) {
 		String sql = "UPDATE flujo_caja SET estado = ? WHERE id = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, nuevoEstado);
 			stmt.setInt(2, id);
 			stmt.executeUpdate();
@@ -120,7 +116,8 @@ public class FlujoCajaDAOImp implements FlujoCajaDAO {
 	@Override
 	public boolean existeFlujoSimilar(FlujoCaja flujo) {
 		String sql = "SELECT COUNT(*) FROM flujo_caja WHERE nombre_cuenta = ? AND tipo = ? AND concepto = ? AND fecha = ?";
-		try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+		try (Connection conn = DbConnection.getConnection();
+		PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, flujo.getNombreCuenta());
 			stmt.setString(2, flujo.getTipo());
 			stmt.setString(3, flujo.getConcepto());

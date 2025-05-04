@@ -8,24 +8,15 @@ import java.util.List;
 import integracion.DbConnection;
 
 public class LocalDAOImp implements LocalDAO {
-
-    private Connection conexion;
-
-    public LocalDAOImp() {
-    	try {
-			this.conexion = DbConnection.getConnection();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
+    public LocalDAOImp() { }
 
     @Override
     public List<TLocal> obtener() {
         List<TLocal> lista = new ArrayList<>();
         String sql = "SELECT * FROM Locales";
 
-        try (PreparedStatement stmt = conexion.prepareStatement(sql);
+        try (Connection conn = DbConnection.getConnection();
+        PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
