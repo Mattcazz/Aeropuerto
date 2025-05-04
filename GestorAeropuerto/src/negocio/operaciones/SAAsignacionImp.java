@@ -9,9 +9,11 @@ import integracion.operaciones.DAOPuerta;
 import integracion.vuelos.DAOVuelo;
 import negocio.vuelos.TransferAvion;
 import negocio.vuelos.TransferVuelo;
+import negocio.vuelos.event.ObserverVuelos;
+import negocio.vuelos.event.VueloEliminado;
 import integracion.FactoriaDAO;
 
-public class SAAsignacionImp implements SAAsignacion{
+public class SAAsignacionImp implements SAAsignacion, ObserverVuelos{
 	
 	DAOAsignacion daoAsignacion;
 	DAOVuelo daoVuelo ;
@@ -23,6 +25,7 @@ public class SAAsignacionImp implements SAAsignacion{
 		daoVuelo = FactoriaDAO.getInstancia().nuevoDAOVuelo();
 		daoAvion = FactoriaDAO.getInstancia().nuevoDAOAvion();
 		estrategias = new RegistrosDeEstrategias();
+		VueloEliminado.subscribe(this); // me suscribo a la clase 
 	}
 
 	@Override
@@ -125,6 +128,12 @@ public class SAAsignacionImp implements SAAsignacion{
 		}
 		
 		return transfer;
+	}
+
+	@Override
+	public void event(String vuelo_id) {
+		// TODO Auto-generated method stub
+		daoAsignacion.borrarAsignacionesDeVuelo(vuelo_id);
 	}
 	
 	

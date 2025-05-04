@@ -176,4 +176,17 @@ public class DAOAsignacionImp implements DAOAsignacion{
 			return false;
 		}
 	}
+
+	@Override
+	public void borrarAsignacionesDeVuelo(String vuelo_id) {
+		// TODO Auto-generated method stub
+		String query = "DELETE FROM asignacion WHERE vueloId = ?";
+		try(Connection conn = DbConnection.getConnection();
+				PreparedStatement  stmt = conn.prepareStatement(query)){
+				stmt.setString(1, vuelo_id);
+				stmt.executeUpdate();
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage()); 
+		}
+	}
 }

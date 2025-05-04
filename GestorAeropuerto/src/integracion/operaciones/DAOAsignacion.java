@@ -13,6 +13,7 @@ public interface DAOAsignacion {
 	public boolean borrarAsignacion(int asignacion_id);
 	public boolean borrarAsignacionesEnPuerta(int puerta_id);
 	public boolean cambiarEstadoAsignacion(int asignacion_id, String nuevo_estado);
+	public void borrarAsignacionesDeVuelo(String vuelo_id);
 	public TransferAsignacion getAsignacion(int asignacion_id);
 	public List<TransferAsignacion>getAsignaciones();
 	public List<TransferAsignacion> getAsignacionesInPuerta(int puerta_id);
