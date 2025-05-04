@@ -13,6 +13,8 @@ public interface SAAviones {
 	
 	
 	//
+	public String checkAvion(String avionId, double altura, double anchura, double longitud,
+			int maxPasajeros, double peso, String aerolinea);
 	public List<String> getAllAvionIds();
 
 }

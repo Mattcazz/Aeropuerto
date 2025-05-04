@@ -41,4 +41,10 @@ public class SAAvionesImp implements SAAviones {
 		
 		return (daoAviones.getAllAvionIds());
 	}
+	
+	@Override
+	public String checkAvion(String avionId, double altura, double anchura, double longitud,
+			int maxPasajeros, double peso, String aerolinea) {
+		return (null);
+	}
 }

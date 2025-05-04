@@ -13,6 +13,8 @@ public enum Eventos {
 	ABRIR_MENU_ELIMINAR_VUELO,
 	ABRIR_MENU_BUSCAR_VUELO,
 	
+	ABRIR_MENU_CREAR_AVION,
+	
 	// Operaciones CUs
 	// Aqui poner los eventos relacionados con los botones de las pantallas
 	// Por ejemplo abrir submenus, hacer una operacion, mostrar un mensaje
@@ -27,6 +29,8 @@ public enum Eventos {
 	ACTUALIZAR_VUELO,
 	ELIMINAR_VUELO,
 	BUSCAR_VUELO,
+	
+	CREAR_AVION,
 	
 	MOSTRAR_MENSAJE,
 	

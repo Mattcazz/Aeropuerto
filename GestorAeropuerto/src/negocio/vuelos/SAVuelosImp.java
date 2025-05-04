@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import integracion.vuelos.DAOVuelo;
+import negocio.vuelos.event.VueloEliminado;
 import integracion.FactoriaDAO;
 import integracion.FactoriaDAOImp;
 
@@ -32,8 +33,14 @@ public class SAVuelosImp implements SAVuelos {
 	@Override
 	public boolean eliminarVuelo(String vueloId) {
 		DAOVuelo daoVuelos = this.factoriaDAO.nuevoDAOVuelo();
-
-		return (daoVuelos.eliminarVuelo(vueloId));
+		
+		if (daoVuelos.eliminarVuelo(vueloId)) {
+			VueloEliminado.publish();
+			
+			return (true);
+		}
+		
+		return (false);
 	}
 	
 	@Override

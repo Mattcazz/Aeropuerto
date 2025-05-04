@@ -207,6 +207,48 @@ public class ControladorImp extends Controlador {
 				menu_mostrar.init(vuelos);
 				break;
 			}
+			case ABRIR_MENU_CREAR_AVION: {
+				GUICrearAvionImp menu = (GUICrearAvionImp) GUICrearAvion.getInstancia();
+				
+				menu.init();
+				break;
+			}
+			case CREAR_AVION: {
+				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
+				
+				GUICrearAvionImp menu = (GUICrearAvionImp) datos;
+				
+				String error_message = saAviones.checkAvion(
+						menu.getAvionId(),
+						Double.parseDouble(menu.getAltura()),
+						Double.parseDouble(menu.getAnchura()),
+						Double.parseDouble(menu.getLongitud()),
+						Integer.parseInt(menu.getMaxPasajeros()),
+						Double.parseDouble(menu.getPeso()),
+						menu.getAerolinea()
+			);
+				if (error_message != null) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, error_message);
+					break;
+				}
+				
+				if (!saAviones.crearAvion(
+						menu.getAvionId(),
+						Double.parseDouble(menu.getAltura()),
+						Double.parseDouble(menu.getAnchura()),
+						Double.parseDouble(menu.getLongitud()),
+						Integer.parseInt(menu.getMaxPasajeros()),
+						Double.parseDouble(menu.getPeso()),
+						menu.getAerolinea()
+				)) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al crear avion");
+					break;
+				}
+				
+				// Cerrar la ventana
+				menu.getFrame().dispose();
+				break;
+			}
 			default: {
 			}
 		}

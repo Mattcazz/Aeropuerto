@@ -34,6 +34,8 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		JButton EliminarVueloButton = new JButton("Eliminar Vuelo");
 		JButton BuscarVueloButton = new JButton("Buscar Vuelo");
 		
+		JButton CrearAvionButton = new JButton("Crear Avion");
+		
 		 JButton salirBtn = new JButton("Salir");
 	     salirBtn.addActionListener(e -> {
 	        	marco.setVisible(false);
@@ -44,6 +46,9 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		buttonsPanel.add(ActualizarVueloButton);
 		buttonsPanel.add(EliminarVueloButton);
 		buttonsPanel.add(BuscarVueloButton);
+		
+		buttonsPanel.add(CrearAvionButton);
+
 		buttonsPanel.add(salirBtn);
 		
 		panel.add(buttonsPanel);
@@ -75,7 +80,13 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 			public void actionPerformed(ActionEvent e) {
 				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_BUSCAR_VUELO, null);
 			}
-		});	
+		});
+		
+		CrearAvionButton.addActionListener(new ActionListener() { 
+			public void actionPerformed(ActionEvent e) {
+				ControladorImp.getInstancia().accion(Eventos.ABRIR_MENU_CREAR_AVION, null);
+			}
+		});
 		
 		
 		marco.setVisible(true);
