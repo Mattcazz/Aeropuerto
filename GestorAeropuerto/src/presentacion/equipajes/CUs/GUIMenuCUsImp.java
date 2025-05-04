@@ -40,6 +40,10 @@ public class GUIMenuCUsImp extends GUIMenuCUs{
 		buttonsPanel.add(accederButton);
 		buttonsPanel.add(salirButton);
 		
+		salirButton.addActionListener(e -> {
+        	marco.setVisible(false);
+        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
+        });
 		
 		panel.add(buttonsPanel);
 		
