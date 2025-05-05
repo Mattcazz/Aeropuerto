@@ -30,11 +30,11 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		buttonsPanel.setPreferredSize(new Dimension(500, 250));
 		
 		JButton crearVueloButton = new JButton("Crear Vuelo");
-		JButton modificarVueloButton = new JButton("Actualizar Vuelo");
+		JButton modificarVueloButton = new JButton("Modificar Vuelos");
 		JButton buscarVueloButton = new JButton("Buscar Vuelo");
 		
 		JButton crearAvionButton = new JButton("Crear Avion");
-		JButton modificarAvionButton = new JButton("Actualizar Avion");
+		JButton modificarAvionButton = new JButton("Modificar Aviones");
 		
 		 JButton salirBtn = new JButton("Salir");
 	     salirBtn.addActionListener(e -> {
