@@ -46,7 +46,16 @@ public class SAPlazaImp implements SAPlaza {
 
     @Override
     public void llegaVehiculo(int numero, String matricula) throws Exception {
-        dao.llegaVehiculo(numero, matricula);
+        for (TransferPlaza existing : listarPlazas()) {
+            if (existing.getEstado() == EstadoPlaza.OCUPADA &&
+                existing.getMatricula().equals(matricula)) {
+                throw new Exception("La matrícula " + matricula +
+                                    " ya está registrada en la plaza " +
+                                    existing.getNumero());
+            }
+        }
+        
+    	dao.llegaVehiculo(numero, matricula);
         TransferPlaza p = obtenerPlaza(numero);
         notifyObservers(p);
     }

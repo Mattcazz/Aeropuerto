@@ -111,9 +111,12 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
             v.getFrame().setVisible(true);
         });
 
-        // == Listener Salir ==
-        btnSalir.addActionListener(e -> marco.dispose());
-
+        btnSalir.addActionListener(e -> {
+        	marco.setVisible(false);
+        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
+        	
+        });
+        
         marco.setVisible(true);
     }
 
