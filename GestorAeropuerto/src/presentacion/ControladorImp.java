@@ -82,10 +82,10 @@ public class ControladorImp extends Controlador {
 			case SUB_ESTACIONAMIENTO: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
-//	            estacionamiento.presentacion.GUIMenuCUsImp menu = (estacionamiento.presentacion.GUIMenuCUsImp) estacionamiento.presentacion.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+				marco.setVisible(false);
+	            presentacion.estacionamiento.CUs.GUIMenuCUsImp menu = (presentacion.estacionamiento.CUs.GUIMenuCUsImp) presentacion.estacionamiento.CUs.GUIMenuCUs.getInstancia();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 	

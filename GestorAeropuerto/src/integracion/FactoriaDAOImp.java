@@ -2,6 +2,8 @@ package integracion;
 
 import integracion.equipajes.DAOEquipajes;
 import integracion.equipajes.DAOEquipajesImp;
+import integracion.estacionamiento.DAOPlaza;
+import integracion.estacionamiento.DAOPlazaProxy;
 import integracion.financiera.CuentaBancariaDAO;
 import integracion.financiera.CuentaBancariaDAOImp;
 import integracion.financiera.EmpleadoDAO;
@@ -92,5 +94,10 @@ public class FactoriaDAOImp extends FactoriaDAO {
 	@Override
 	public DAOEquipajes nuevoDAOEquipajes() {
 		return new DAOEquipajesImp();
+	}
+	
+	@Override
+	public DAOPlaza nuevoDAOPlaza() {
+		return new DAOPlazaProxy();
 	}
 }

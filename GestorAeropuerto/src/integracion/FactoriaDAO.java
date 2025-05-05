@@ -1,6 +1,7 @@
 package integracion;
 
 import integracion.equipajes.DAOEquipajes;
+import integracion.estacionamiento.DAOPlaza;
 import integracion.financiera.CuentaBancariaDAO;
 import integracion.financiera.EmpleadoDAO;
 import integracion.financiera.FlujoCajaDAO;
@@ -46,4 +47,6 @@ public abstract class FactoriaDAO {
     public abstract LocalDAO getLocalDAO();
     
     public abstract DAOEquipajes nuevoDAOEquipajes();
+    
+    public abstract DAOPlaza nuevoDAOPlaza();
 }
