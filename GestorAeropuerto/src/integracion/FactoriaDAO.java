@@ -14,6 +14,8 @@ import integracion.paneles.DAOPaneles;
 import integracion.personal.DAOEmpleado;
 import integracion.vuelos.DAOAvion;
 import integracion.vuelos.DAOVuelo;
+import integracion.seguridad.DAOAcceso;
+import integracion.seguridad.DAODispositivo;
 
 public abstract class FactoriaDAO {
 	
@@ -49,4 +51,7 @@ public abstract class FactoriaDAO {
     public abstract DAOEquipajes nuevoDAOEquipajes();
     
     public abstract DAOPlaza nuevoDAOPlaza();
+    
+    public abstract DAOAcceso nuevoDAOAcceso();
+    public abstract DAODispositivo nuevoDAODispositivo();
 }

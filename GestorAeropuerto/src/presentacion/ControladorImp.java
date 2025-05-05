@@ -102,10 +102,10 @@ public class ControladorImp extends Controlador {
 			case SUB_SEGURIDAD: {
 				JFrame marco = (JFrame) datos;
 				
-//				marco.setVisible(false);
-//	            seguridad.presentacion.CUs.GUIMenuCUsImp menu = (seguridad.presentacion.CUs.GUIMenuCUsImp) seguridad.presentacion.CUs.GUIMenuCUs.getInstancia();
-//				JFrame menuFrame = menu.getFrame();
-//				menuFrame.setVisible(true);
+				marco.setVisible(false);
+	            presentacion.seguridad.CUs.GUIMenuCUsImp menu = (presentacion.seguridad.CUs.GUIMenuCUsImp) presentacion.seguridad.CUs.GUIMenuCUs.getInstancia();
+				JFrame menuFrame = menu.getFrame();
+				menuFrame.setVisible(true);
 				break;
 			}
 			

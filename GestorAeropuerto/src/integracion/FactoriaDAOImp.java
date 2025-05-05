@@ -24,6 +24,10 @@ import integracion.paneles.DAOPaneles;
 import integracion.paneles.DAOPanelesImp;
 import integracion.personal.DAOEmpleado;
 import integracion.personal.DAOEmpleadoImp;
+import integracion.seguridad.DAOAcceso;
+import integracion.seguridad.DAOAccesoImp;
+import integracion.seguridad.DAODispositivo;
+import integracion.seguridad.DAODispositivoImp;
 import integracion.vuelos.DAOAvionImp;
 import integracion.vuelos.DAOVueloImp;
 import integracion.vuelos.DAOAvion;
@@ -99,5 +103,15 @@ public class FactoriaDAOImp extends FactoriaDAO {
 	@Override
 	public DAOPlaza nuevoDAOPlaza() {
 		return new DAOPlazaProxy();
+	}
+	
+	@Override
+	public DAOAcceso nuevoDAOAcceso() {
+		return new DAOAccesoImp();
+	}
+	
+	@Override
+	public DAODispositivo nuevoDAODispositivo() {
+		return new DAODispositivoImp();
 	}
 }
