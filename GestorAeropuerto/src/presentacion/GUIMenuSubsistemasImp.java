@@ -21,15 +21,15 @@ public class GUIMenuSubsistemasImp extends GUIMenuSubsistemas {
         title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
         mainPanel.add(title);
 
-        JPanel buttonsPanel = new JPanel(new GridLayout(4, 3, 15, 15));
+        JPanel buttonsPanel = new JPanel(new GridLayout(3, 5, 15, 15));
         buttonsPanel.setBackground(Color.WHITE);
-        buttonsPanel.setMaximumSize(new Dimension(600, 300));
+        buttonsPanel.setMaximumSize(new Dimension(800, 300));
 
         Eventos[] eventos = {
             Eventos.SUB_PANELES, Eventos.SUB_PERSONAL, Eventos.SUB_EQUIPAJE,
             Eventos.SUB_OPERACIONES, Eventos.SUB_FINANCIERA, Eventos.SUB_INCIDENCIAS,
             Eventos.SUB_LOCALES, Eventos.SUB_ESTACIONAMIENTO, Eventos.SUB_VUELOS,
-            Eventos.SUB_SEGURIDAD, Eventos.ABANDONAR
+            Eventos.SUB_SEGURIDAD
         };
 
         for (Eventos evento : eventos) {
@@ -39,6 +39,14 @@ public class GUIMenuSubsistemasImp extends GUIMenuSubsistemas {
             btn.addActionListener(e -> ControladorImp.getInstancia().accion(evento, marco));
             buttonsPanel.add(btn);
         }
+
+        buttonsPanel.add(new JPanel()).setBackground(Color.WHITE); // spacer
+        buttonsPanel.add(new JPanel()).setBackground(Color.WHITE); // spacer
+        
+        JButton abandonarButton = new JButton(formatearNombre(Eventos.ABANDONAR.name()));
+        abandonarButton.setFocusPainted(false);
+        abandonarButton.addActionListener(e -> ControladorImp.getInstancia().accion(Eventos.ABANDONAR, marco));
+        buttonsPanel.add(abandonarButton);
 
         mainPanel.add(buttonsPanel);
 

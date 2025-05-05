@@ -117,6 +117,7 @@ public class ControladorImp extends Controlador {
 			case ABANDONAR:
 				JFrame marco = (JFrame) datos;
 				marco.dispose();
+				System.exit(0);
 		}
 	}
 	
