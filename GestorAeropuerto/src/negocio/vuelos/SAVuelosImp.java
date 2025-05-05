@@ -107,12 +107,6 @@ public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 			return ("VueloID solo puede contener A-Z y 0-9");
 		}
 		
-		// Comprobar que un vuelo con este ID no existe ya
-		TransferVuelo transferVuelo = daoVuelos.getVuelo(vueloId);
-		if (transferVuelo != null) {
-			return ("Un vuelo con este ID ya existe!");
-		}
-		
 		// Comprobamos que el origen y destino tienen el formato correcto
 		if (!this.isAllUpper(origen) || !this.isAllUpper(destino)) {
 			return ("Origen y Destino solo pueden tener letras mayusculas");

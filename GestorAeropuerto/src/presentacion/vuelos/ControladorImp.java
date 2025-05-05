@@ -81,6 +81,11 @@ public class ControladorImp extends Controlador {
 					break;
 				}
 				
+				TransferVuelo vuelo = saVuelos.getVuelo(menu.getVueloId());
+				if (vuelo != null) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, "Un vuelo con este ID ya existe");
+				}
+				
 				if (!saVuelos.crearVuelo(
 						menu.getVueloId(),
 						menu.getAvionId(),
@@ -248,10 +253,15 @@ public class ControladorImp extends Controlador {
 						menu.getMaxPasajeros(),
 						menu.getPeso(),
 						menu.getAerolinea()
-			);
+				);
 				if (error_message != null) {
 					this.accion(Eventos.MOSTRAR_MENSAJE, error_message);
 					break;
+				}
+				
+				TransferAvion avion = saAviones.getAvion(menu.getAvionId());
+				if (avion != null) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, "Un avion con este ID ya existe");
 				}
 				
 				if (!saAviones.crearAvion(

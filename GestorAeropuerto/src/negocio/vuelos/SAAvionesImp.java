@@ -68,12 +68,6 @@ public class SAAvionesImp implements SAAviones {
 			return ("VueloID solo puede contener A-Z y 0-9");
 		}
 			
-		// Comprobar que un vuelo con este ID no existe ya
-		TransferAvion transferAvion = daoAvion.getAvion(avionId);
-		if (transferAvion != null) {
-			return ("Un avion con este ID ya existe!");
-		}
-			
 		// Comprobar que las dimensiones y el peso son Doubles validos
 		try {
 			Double.parseDouble(altura);
