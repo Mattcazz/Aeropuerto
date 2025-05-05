@@ -96,6 +96,7 @@ public class ControladorImp extends Controlador {
 				}
 				
 				// Cerrar la ventana
+				this.accion(Eventos.MOSTRAR_MENSAJE, "Vuelo creado");
 				menu.getFrame().dispose();
 				break;
 			}
@@ -161,6 +162,7 @@ public class ControladorImp extends Controlador {
 				);
 				GUIModificarVueloImp parent = menu.getParent();
 				parent.actualizar(Eventos.ACTUALIZAR_VUELO, transferVuelo);
+				this.accion(Eventos.MOSTRAR_MENSAJE, "Vuelo modificado");
 				menu.getFrame().dispose();
 				break;
 			}
@@ -168,12 +170,25 @@ public class ControladorImp extends Controlador {
 				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
 				GUIModificarVueloImp menu = (GUIModificarVueloImp) datos;
 
+				int respuesta = JOptionPane.showConfirmDialog(
+				    null,
+				    "¿Estás seguro de que quieres eliminar esta vuelo? Esta acción es irreversible.",
+				    "Confirmar eliminación",
+				    JOptionPane.YES_NO_OPTION,
+				    JOptionPane.WARNING_MESSAGE
+				);
+				
+				if (respuesta == JOptionPane.NO_OPTION) {
+					break;
+				}
+				
 				TransferVuelo transferVuelo = menu.getSelectedVuelo();
 				if (!saVuelos.eliminarVuelo(transferVuelo.getVueloId())) {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al eliminar vuelo");
 					break;
 				}
 				
+				this.accion(Eventos.MOSTRAR_MENSAJE, "Vuelo eliminado");
 				menu.actualizar(Eventos.ELIMINAR_VUELO, transferVuelo.getVueloId());
 				break;
 			}
@@ -312,6 +327,18 @@ public class ControladorImp extends Controlador {
 			case ELIMINAR_AVION: {
 				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
 				GUIModificarAvionImp menu = (GUIModificarAvionImp) datos;
+				
+				int respuesta = JOptionPane.showConfirmDialog(
+				    null,
+				    "¿Estás seguro de que quieres eliminar esta vuelo? Esta acción es irreversible.",
+				    "Confirmar eliminación",
+				    JOptionPane.YES_NO_OPTION,
+				    JOptionPane.WARNING_MESSAGE
+				);
+				
+				if (respuesta == JOptionPane.NO_OPTION) {
+					break;
+				}
 
 				TransferAvion transferAvion = menu.getSelectedAvion();
 				if (!saAviones.eliminarAvion(transferAvion.getAvionId())) {
