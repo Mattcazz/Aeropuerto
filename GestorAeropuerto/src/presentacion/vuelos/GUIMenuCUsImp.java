@@ -2,6 +2,7 @@ package presentacion.vuelos;
 
 import javax.swing.*;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,30 +18,34 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-		panel.setPreferredSize(new Dimension(500, 250));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setBackground(Color.WHITE);
+//		panel.setPreferredSize(new Dimension(500, 250));
 		
-		JLabel title = new JLabel("Menu");
-		title.setFont(new Font("Dialog", Font.PLAIN, 24));
+		JLabel title = new JLabel("Vuelos");
+		title.setFont(new Font("SansSerif", Font.BOLD, 26));
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
 		
 		panel.add(title);
 		
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new GridLayout(3, 3, 10, 10));
-		buttonsPanel.setPreferredSize(new Dimension(500, 250));
+		buttonsPanel.setLayout(new GridLayout(3, 3, 15, 15));
+		buttonsPanel.setBackground(Color.WHITE);
+		buttonsPanel.setMaximumSize(new Dimension(600, 300));
 		
-		JButton crearVueloButton = new JButton("Crear Vuelo");
-		JButton modificarVueloButton = new JButton("Modificar Vuelos");
-		JButton buscarVueloButton = new JButton("Buscar Vuelo");
+		JButton crearVueloButton = this.createCUButton("Crear Vuelo");
+		JButton modificarVueloButton = this.createCUButton("Modificar Vuelos");
+		JButton buscarVueloButton = this.createCUButton("Buscar Vuelo");
 		
-		JButton crearAvionButton = new JButton("Crear Avion");
-		JButton modificarAvionButton = new JButton("Modificar Aviones");
+		JButton crearAvionButton = this.createCUButton("Crear Avion");
+		JButton modificarAvionButton = this.createCUButton("Modificar Aviones");
 		
-		 JButton salirBtn = new JButton("Salir");
-	     salirBtn.addActionListener(e -> {
-	        	marco.setVisible(false);
-	        	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
-	        });
+		JButton salirButton = this.createCUButton("Salir");
+	    salirButton.addActionListener(e -> {
+	       	marco.setVisible(false);
+	       	presentacion.Controlador.getInstancia().accion(presentacion.Eventos.SALIR, null);
+	    });
 		
 		buttonsPanel.add(crearVueloButton);
 		buttonsPanel.add(modificarVueloButton);
@@ -48,13 +53,15 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 
 		buttonsPanel.add(crearAvionButton);
 		buttonsPanel.add(modificarAvionButton);
+		buttonsPanel.add(new JPanel()).setBackground(Color.WHITE); // spacing
 
-		buttonsPanel.add(salirBtn);
+		buttonsPanel.add(new JPanel()).setBackground(Color.WHITE); // spacing
+		buttonsPanel.add(salirButton);
 		
 		panel.add(buttonsPanel);
 		
 		marco.getContentPane().add(panel);
-		marco.setTitle("Menu");
+		marco.setTitle("Vuelos");
 		marco.pack();
 		
 					
@@ -90,6 +97,13 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		
 		
 		marco.setVisible(true);
+	}
+	
+	private JButton createCUButton(String label) {
+		JButton button = new JButton(label);
+		button.setFocusPainted(false);
+		
+		return (button);
 	}
 	
 	
