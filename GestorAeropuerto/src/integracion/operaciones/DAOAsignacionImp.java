@@ -189,4 +189,29 @@ public class DAOAsignacionImp implements DAOAsignacion{
 			System.out.println("SQLException: " + ex.getMessage()); 
 		}
 	}
+
+	@Override
+	public TransferAsignacion getAsignacionFromVuelo(String vuelo_id) {
+		// TODO Auto-generated method stub
+		
+		TransferAsignacion ta= null;
+		
+		String query = "SELECT * FROM ASIGNACION WHERE vueloId = ? "
+				+ "ORDER BY hora_llegada ASC";
+		
+		try(Connection conn = DbConnection.getConnection();
+				PreparedStatement  stmt = conn.prepareStatement(query)){
+			
+			stmt.setString(1, vuelo_id);
+			
+			try (ResultSet rs= stmt.executeQuery()){
+				if(rs.next()) ta = getAsignacionFromRow(rs);
+			}
+			
+			return ta;
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage()); 
+			return null;
+		}
+	}
 }

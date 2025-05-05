@@ -82,7 +82,8 @@ public class SAAsignacionImp implements SAAsignacion, ObserverVuelos{
 		// TODO Auto-generated method stub
 		TransferVuelo vuelo = daoVuelo.getVuelo(request.getVueloId());
 		
-		return actualizarGUIGestionAsignaciones(FactoriaDAO.getInstancia().nuevoDAOAsignacion().crearAsignacion(vuelo, request.getPuertaId()));
+		// Se comprueba primero que el vuelo no esta en asignaciones ya y luego si se puede crear 
+		return actualizarGUIGestionAsignaciones(FactoriaDAO.getInstancia().nuevoDAOAsignacion().getAsignacionFromVuelo(vuelo.getVueloId()) == null && FactoriaDAO.getInstancia().nuevoDAOAsignacion().crearAsignacion(vuelo, request.getPuertaId()));
 	}
 
 	@Override

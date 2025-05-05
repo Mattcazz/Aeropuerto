@@ -18,5 +18,6 @@ public interface DAOAsignacion {
 	public List<TransferAsignacion>getAsignaciones();
 	public List<TransferAsignacion> getAsignacionesInPuerta(int puerta_id);
 
+	public TransferAsignacion getAsignacionFromVuelo(String vuelo_id);
 	public List<TransferAsignacion> getAsignacionesDePuertaEnFranja(int puerta_id, LocalDateTime hora_inicio, LocalDateTime hora_fin);
 }
