@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import integracion.vuelos.DAOVuelo;
+import negocio.operaciones.TransferAsignacion;
 import negocio.vuelos.event.AvionEliminado;
 import negocio.vuelos.event.ObserverVuelos;
 import negocio.vuelos.event.VueloEliminado;
 import integracion.FactoriaDAO;
 import integracion.FactoriaDAOImp;
+import integracion.operaciones.DAOAsignacion;
 
 public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 	FactoriaDAO factoriaDAO = new FactoriaDAOImp();
@@ -62,6 +64,20 @@ public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 		DAOVuelo daoVuelos = this.factoriaDAO.nuevoDAOVuelo();
 		
 		return (daoVuelos.getVuelo(vueloId));
+	}
+	
+	@Override
+	public TransferAsignacion getAsignacion(String vueloId) {
+		DAOAsignacion daoAsignacion = this.factoriaDAO.nuevoDAOAsignacion();
+		
+		List<TransferAsignacion> asignaciones  = daoAsignacion.getAsignaciones();
+		for (TransferAsignacion asignacion : asignaciones) {
+			if (asignacion.getVueloId().equals(vueloId)) {
+				return (asignacion);
+			}
+		}
+		
+		return (null);
 	}
 	
 	@Override

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import negocio.operaciones.TransferAsignacion;
 import negocio.vuelos.*;
 import presentacion.vuelos.CUs.*;
 
@@ -41,6 +42,7 @@ public class ControladorImp extends Controlador {
 				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
 
 				GUIModificarVueloImp menu = (GUIModificarVueloImp) GUIModificarVuelo.getInstancia();
+				
 				List<TransferVuelo> vuelos = saVuelos.getAllVuelos();
 				// List<TransferVuelo> test = new ArrayList<>();
 				// test.add(new TransferVuelo("A9X7B2", "1", "JFK", "LAX", LocalDateTime.of(2025, 5, 1, 10, 30), LocalDateTime.of(2025, 5, 1, 13, 45), "Domestico", true));
@@ -106,10 +108,17 @@ public class ControladorImp extends Controlador {
 				break;
 			}
 			case ABRIR_SUBMENU_ACTUALIZAR_VUELO: {
+				SAVuelos saVuelos = this.factoriaSA.nuevoSAVuelos();
 				SAAviones saAviones = this.factoriaSA.nuevoSAAviones();
 
 				GUIModificarVueloImp daddy = (GUIModificarVueloImp) datos;
 				GUIActualizarVueloImp menu = (GUIActualizarVueloImp) GUIActualizarVuelo.getInstancia();
+				
+				TransferAsignacion asignacion = saVuelos.getAsignacion(daddy.getSelectedVuelo().getVueloId());
+				if (asignacion != null) {
+					this.accion(Eventos.MOSTRAR_MENSAJE, "Este vuelo esta asignado a la puerta " + asignacion.getPuertaId() + "\nNo se puede modificar");
+					break;
+				}
 				
 				List<TransferAvion> aviones = saAviones.getAllAviones();
 				List<String> avionIds = new ArrayList<String>();

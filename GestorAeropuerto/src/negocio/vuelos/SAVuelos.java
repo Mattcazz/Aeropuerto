@@ -3,6 +3,8 @@ package negocio.vuelos;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import negocio.operaciones.TransferAsignacion;
+
 public interface SAVuelos {
 	// BBDD
 	public boolean crearVuelo(String vueloId, String avionId, String origen, String destino,
@@ -11,6 +13,7 @@ public interface SAVuelos {
 			LocalDateTime tiempoSalida, LocalDateTime tiempoAterrizaje, String tipoVuelo, boolean vip);
 	public boolean eliminarVuelo(String vueloId);
 	public TransferVuelo getVuelo(String vueloId);
+	public TransferAsignacion getAsignacion(String vueloId);
 	public List<TransferVuelo> getAllVuelos();
 	public List<TransferVuelo> buscarVuelo(LocalDateTime tiempo, boolean antes);
 	
