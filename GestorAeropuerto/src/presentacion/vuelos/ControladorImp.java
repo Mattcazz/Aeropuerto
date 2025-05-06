@@ -95,7 +95,7 @@ public class ControladorImp extends Controlador {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Un vuelo con este ID ya existe");
 				}
 				
-				VueloCreado.publish(vuelo.getVueloId());
+				VueloCreado.publish(menu.getVueloId());
 				
 				if (!saVuelos.crearVuelo(
 						menu.getVueloId(),
