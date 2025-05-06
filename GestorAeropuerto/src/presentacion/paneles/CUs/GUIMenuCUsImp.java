@@ -48,12 +48,12 @@ public class GUIMenuCUsImp extends GUIMenuCUs {
 		JButton OperarPanelesButton = new JButton("Operar Panel");
 		JButton SalirButton = new JButton("Salir");
 		
-		buttonsPanel.add(AñadirDatosButton);
-		buttonsPanel.add(EliminarDatosButton);
-		buttonsPanel.add(ModificarDatosButton);
 		buttonsPanel.add(AñadirPanelButton);
 		buttonsPanel.add(EliminarPanelButton);
 		buttonsPanel.add(OperarPanelesButton);
+		buttonsPanel.add(AñadirDatosButton);
+		buttonsPanel.add(EliminarDatosButton);
+		buttonsPanel.add(ModificarDatosButton);
 		buttonsPanel.add(MostrarDatosButton);
 		buttonsPanel.add(FiltrarDatosButton);
 		buttonsPanel.add(SalirButton);
