@@ -62,6 +62,7 @@ public class SAPuertasImp implements SAPuertas{
 		comprobarDimensiones(transfer);
 		
 		if (transfer.getError() != null) { // si la comprobacion regresa errores no se modifica
+			transfer.setPuerta(daoPuerta.getPuerta(puerta.getPuertaID()));
 			return transfer;
 		}
 		
