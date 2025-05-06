@@ -92,6 +92,7 @@ public class GUICrearVueloImp extends GUICrearVuelo {
         JPanel salidaPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         comboSalidaHora = new JComboBox<>(generateHourOptions());
         comboSalidaMinuto = new JComboBox<>(generateMinuteOptions());
+        comboSalidaMinuto.setEnabled(false);
         salidaPanel.add(comboSalidaHora);
         salidaPanel.add(new JLabel(":"));
         salidaPanel.add(comboSalidaMinuto);
@@ -105,6 +106,7 @@ public class GUICrearVueloImp extends GUICrearVuelo {
         JPanel aterrizajePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
         comboAterrizajeHora = new JComboBox<>(generateHourOptions());
         comboAterrizajeMinuto = new JComboBox<>(generateMinuteOptions());
+        comboAterrizajeMinuto.setEnabled(false);
         aterrizajePanel.add(comboAterrizajeHora);
         aterrizajePanel.add(new JLabel(":"));
         aterrizajePanel.add(comboAterrizajeMinuto);

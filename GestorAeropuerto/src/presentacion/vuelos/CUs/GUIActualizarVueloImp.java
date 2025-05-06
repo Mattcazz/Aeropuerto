@@ -97,6 +97,7 @@ public class GUIActualizarVueloImp extends GUIActualizarVuelo {
 		comboSalidaMinuto = new JComboBox<>(generateMinuteOptions());
 		comboSalidaHora.setSelectedItem(String.format("%02d", startData.getTiempoSalida().getHour()));
 		comboSalidaMinuto.setSelectedItem(String.format("%02d", startData.getTiempoSalida().getMinute() / 5 * 5));
+		comboSalidaMinuto.setEnabled(false);
 		salidaPanel.add(comboSalidaHora);
 		salidaPanel.add(new JLabel(":"));
 		salidaPanel.add(comboSalidaMinuto);
@@ -112,6 +113,7 @@ public class GUIActualizarVueloImp extends GUIActualizarVuelo {
 		comboAterrizajeMinuto = new JComboBox<>(generateMinuteOptions());
 		comboAterrizajeHora.setSelectedItem(String.format("%02d", startData.getTiempoAterrizaje().getHour()));
 		comboAterrizajeMinuto.setSelectedItem(String.format("%02d", startData.getTiempoAterrizaje().getMinute() / 5 * 5));
+		comboAterrizajeMinuto.setEnabled(false);
 		aterrizajePanel.add(comboAterrizajeHora);
 		aterrizajePanel.add(new JLabel(":"));
 		aterrizajePanel.add(comboAterrizajeMinuto);
