@@ -143,6 +143,11 @@ public class SAPuertasImp implements SAPuertas{
 			return transfer;
 		}
 		
+		if(daoPuerta.getBloqueoDePuertaEnHora(bloqueo.getPuertaId(), bloqueo.getHoraInicio(), bloqueo.getHoraFinal()) != null) {
+			transfer.setError("Operacion invalida! Ya hay un bloqueo a esta hora.");
+			return transfer;
+		}
+		
 		if (!daoPuerta.crearBloqueoEnPuerta(bloqueo)) {
 			transfer.setError("Error en guardar en Base de Datos. Revisar informacion!");
 		}

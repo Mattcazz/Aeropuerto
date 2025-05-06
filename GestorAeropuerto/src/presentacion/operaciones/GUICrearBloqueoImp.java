@@ -110,7 +110,6 @@ public class GUICrearBloqueoImp extends GUICrearBloqueo{
 	            return;
 	        }
 
-	        marco.setVisible(false);
 	        transfer.setBloqueo(bloq);
 	        Controlador.getInstancia().accion(Eventos.GUARDAR_BLOQUEO, transfer, null);
 	        

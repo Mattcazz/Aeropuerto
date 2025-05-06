@@ -25,4 +25,5 @@ public interface DAOPuerta {
 	public boolean borrarPuerta(int puerta_id);
 	public List<TransferBloqueo> getBloqueosEnPuerta(int puerta_id);
 	public boolean borrarBloqueosEnPuerta(int puerta_id);
+	public TransferBloqueo getBloqueoDePuertaEnHora(int puerta_id, LocalDateTime hora_inicio, LocalDateTime hora_fin);
 }
