@@ -91,7 +91,8 @@ public class ControladorImp extends Controlador {
 	
 			case SUB_VUELOS: {
 				JFrame marco = (JFrame) datos;
-				negocio.operaciones.FactoriaSA.getInstancia().nuevoSAAsignacion(); // Para que se suscriba a los eventos. 
+				negocio.operaciones.FactoriaSA.getInstancia().nuevoSAAsignacion(); // Para que se suscriba a los eventos.
+				negocio.equipajes.FactoriaSA.getInstancia().nuevoSAEquipajes(); // Para que se suscriba a los eventos.
 				marco.setVisible(false);
 	            presentacion.vuelos.GUIMenuCUsImp menu = (presentacion.vuelos.GUIMenuCUsImp) presentacion.vuelos.GUIMenuCUs.getInstancia();
 				JFrame menuFrame = menu.getFrame();

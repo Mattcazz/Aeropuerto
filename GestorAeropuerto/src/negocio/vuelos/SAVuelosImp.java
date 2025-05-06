@@ -47,13 +47,10 @@ public class SAVuelosImp implements SAVuelos, ObserverVuelos {
 	}
 	
 	public void event(String avionId) {
-		System.out.println("SAVuelosImp: AvionEliminado - " + avionId);
 		List<TransferVuelo> vuelos = this.getAllVuelos();
 		
 		for (TransferVuelo vuelo : vuelos) {
-			System.out.println("AvionIDs: '" + vuelo.getAvionId() + "' - '" + avionId + "'");
 			if (vuelo.getAvionId().equals(avionId)) {
-				System.out.println("Eliminando vuelo '" + vuelo.getVueloId() + "'");
 				this.eliminarVuelo(vuelo.getVueloId());
 			}
 		}

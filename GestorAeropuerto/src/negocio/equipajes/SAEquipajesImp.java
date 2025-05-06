@@ -6,12 +6,19 @@ import java.util.List;
 import integracion.equipajes.DAOEquipajes;
 import integracion.vuelos.DAOVuelo;
 import negocio.vuelos.TransferVuelo;
+import negocio.vuelos.event.ObserverVuelos;
 import integracion.FactoriaDAO;
 
-public class SAEquipajesImp implements SAEquipajes{
+import negocio.vuelos.event.VueloEliminado;
+
+public class SAEquipajesImp implements SAEquipajes, ObserverVuelos {
 	
 	DAOEquipajes daoEquipaje = FactoriaDAO.getInstancia().nuevoDAOEquipajes();
 	DAOVuelo daoVuelos=FactoriaDAO.getInstancia().nuevoDAOVuelo();
+	
+	public SAEquipajesImp() {
+		VueloEliminado.subscribe(this);
+	}
 
 	@Override
 	public List<TransferEquipaje> equipajesPorVuelo(String id_vuelo) {
@@ -51,6 +58,15 @@ public class SAEquipajesImp implements SAEquipajes{
 	public void registrarEquipaje(TransferEquipaje te) {
 		// TODO Auto-generated method stub
 		daoEquipaje.anadirEquipaje(te);
+	}
+
+	@Override
+	public void event(String id_vuelo) {
+		List<TransferEquipaje> te_list = daoEquipaje.obtenerPorIdVuelo(id_vuelo);
+		for (TransferEquipaje te : te_list) {
+			daoEquipaje.eliminarEquipaje(te);
+		}
+		
 	}
 	
 }
