@@ -111,4 +111,8 @@ public class GUICrearCuentaImp extends GUICrearCuenta {
 	public JFrame getFrame() {
 		return marco;
 	}
+	
+	public void mostrar() {
+		marco.setVisible(true);
+	}
 }

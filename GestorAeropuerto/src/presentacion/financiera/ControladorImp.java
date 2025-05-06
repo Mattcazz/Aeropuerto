@@ -39,7 +39,8 @@ public class ControladorImp extends Controlador {
 			}
 
 			case Eventos.AÑADIR_CUENTA: {
-				GUICrearCuenta.getInstancia();
+				GUICrearCuenta gui = GUICrearCuenta.getInstancia();
+				((GUICrearCuentaImp) gui).mostrar();
 				break;
 			}
 
