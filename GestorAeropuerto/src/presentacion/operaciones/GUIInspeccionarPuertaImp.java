@@ -92,6 +92,8 @@ public class GUIInspeccionarPuertaImp extends GUIInspeccionarPuerta{
 			    		
 			    		if(bloqueoSeleccionado != null) {
 			    			verBloqueo.setEnabled(true);
+			    		}else {
+			    			verBloqueo.setEnabled(false);
 			    		}
 			    	}
 			    

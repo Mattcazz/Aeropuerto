@@ -30,7 +30,9 @@ public class GUIVerPuertaImp extends GUIVerPuerta{
 			JOptionPane.showMessageDialog(null, "Puerta modificada correctamente!", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
 			break;
 		case Eventos.GUARDAR_MODIFICACION_PUERTA_RESP_ERROR:
-			mostrarError((String)datos);
+			PeticionPuerta peticionPuerta = (PeticionPuerta) datos;
+			mostrarError(peticionPuerta.getError());
+			actualizarModificacionPuerta(peticionPuerta);
 			break;
 		}
 	}
@@ -99,6 +101,7 @@ public class GUIVerPuertaImp extends GUIVerPuerta{
 	        JButton modificarButton = new JButton("Modificar");
 
 	        JButton guardarButton = new JButton("Guardar cambios");
+	        guardarButton.setEnabled(false);
 	        
 	        
 
@@ -122,6 +125,7 @@ public class GUIVerPuertaImp extends GUIVerPuerta{
 			            	c.setEnabled(true);
 		            	}
 		            }
+		            guardarButton.setEnabled(true);
 		            cancelarButton.setEnabled(true);
 		            modificarButton.setEnabled(false);
 		        });
@@ -134,13 +138,15 @@ public class GUIVerPuertaImp extends GUIVerPuerta{
 		        	 }
 		        	modificarButton.setEnabled(true);
 		        	cancelarButton.setEnabled(false);
+		        	guardarButton.setEnabled(false);
 		        });
 		        
 		        guardarButton.addActionListener(e -> {
 		        	if(guardarModificacionPuerta()) {
 		        		for (Component c : campos) c.setEnabled(false);
 			        	modificarButton.setEnabled(true);
-			        	cancelarButton.setEnabled(false);	
+			        	cancelarButton.setEnabled(false);
+			        	guardarButton.setEnabled(false);
 		        	}
 		        	
 		        });

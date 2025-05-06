@@ -62,6 +62,7 @@ public class SAPuertasImp implements SAPuertas{
 		comprobarDimensiones(transfer);
 		
 		if (transfer.getError() != null) { // si la comprobacion regresa errores no se modifica
+			transfer.setPuerta(daoPuerta.getPuerta(puerta.getPuertaID()));
 			return transfer;
 		}
 		
@@ -140,6 +141,11 @@ public class SAPuertasImp implements SAPuertas{
 		
 		if(!asignacionesEnFranja.isEmpty()) {
 			transfer.setError("Operacion invalida! El bloqueo solapa con vuelos asignados a la puerta.");
+			return transfer;
+		}
+		
+		if(daoPuerta.getBloqueoDePuertaEnHora(bloqueo.getPuertaId(), bloqueo.getHoraInicio(), bloqueo.getHoraFinal()) != null) {
+			transfer.setError("Operacion invalida! Ya hay un bloqueo a esta hora.");
 			return transfer;
 		}
 		

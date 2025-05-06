@@ -116,7 +116,7 @@ public class ControladorImp extends Controlador {
 			saPuertas.guardarModificacionPuerta(peticionPuerta);
 			
 			if (peticionPuerta.getError() != null) {
-				guiVerPuerta.actualizar(Eventos.GUARDAR_MODIFICACION_PUERTA_RESP_ERROR, peticionPuerta.getError());
+				guiVerPuerta.actualizar(Eventos.GUARDAR_MODIFICACION_PUERTA_RESP_ERROR, peticionPuerta);
 			}else {
 				guiVerPuerta.actualizar(Eventos.GUARDAR_MODIFICACION_PUERTA_RESP_OK, peticionPuerta);				
 			}

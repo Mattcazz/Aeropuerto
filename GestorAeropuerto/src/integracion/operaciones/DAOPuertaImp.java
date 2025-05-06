@@ -479,5 +479,27 @@ public class DAOPuertaImp implements DAOPuerta{
 			return puertas;
 	}
 
+	@Override
+	public TransferBloqueo getBloqueoDePuertaEnHora(int puerta_id, LocalDateTime hora_inicio, LocalDateTime hora_fin) {
+		// TODO Auto-generated method stub
+		TransferBloqueo tb = null;
+		
+		String query = "SELECT * FROM bloqueo WHERE puertaid = ? AND (hora_inicio = ? OR hora_final = ?)";
+		
+		try(Connection conn = DbConnection.getConnection();
+				PreparedStatement  stmt = conn.prepareStatement(query)){
+				stmt.setInt(1, puerta_id);
+				stmt.setTimestamp(2, Timestamp.valueOf(hora_inicio));
+				stmt.setTimestamp(3, Timestamp.valueOf(hora_fin));
+				try (ResultSet rs= stmt.executeQuery()){
+					if (rs.next())tb = getBloqueoFromRow(rs);					
+				}
+				return tb;
+		}catch(SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage()); 
+			return null;
+		}
+	}
+
 
 }
