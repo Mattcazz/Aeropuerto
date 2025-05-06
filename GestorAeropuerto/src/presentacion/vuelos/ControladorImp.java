@@ -9,6 +9,12 @@ import javax.swing.JOptionPane;
 
 import negocio.operaciones.TransferAsignacion;
 import negocio.vuelos.*;
+import negocio.vuelos.event.AvionActualizado;
+import negocio.vuelos.event.AvionCreado;
+import negocio.vuelos.event.AvionEliminado;
+import negocio.vuelos.event.VueloActualizado;
+import negocio.vuelos.event.VueloCreado;
+import negocio.vuelos.event.VueloEliminado;
 import presentacion.vuelos.CUs.*;
 
 
@@ -83,10 +89,13 @@ public class ControladorImp extends Controlador {
 					break;
 				}
 				
-				TransferVuelo vuelo = saVuelos.getVuelo(menu.getVueloId());
+				
+				TransferVuelo vuelo = saVuelos.getVuelo(menu.getVueloId());				
 				if (vuelo != null) {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Un vuelo con este ID ya existe");
 				}
+				
+				VueloCreado.publish(vuelo.getVueloId());
 				
 				if (!saVuelos.crearVuelo(
 						menu.getVueloId(),
@@ -150,6 +159,8 @@ public class ControladorImp extends Controlador {
 					break;
 				}
 				
+				VueloActualizado.publish(menu.getVueloId());
+				
 				if (!saVuelos.actualizarVuelo(
 						menu.getVueloId(),
 						menu.getAvionId(),
@@ -197,6 +208,8 @@ public class ControladorImp extends Controlador {
 				}
 				
 				TransferVuelo transferVuelo = menu.getSelectedVuelo();
+				VueloEliminado.publish(transferVuelo.getVueloId());
+				
 				if (!saVuelos.eliminarVuelo(transferVuelo.getVueloId())) {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al eliminar vuelo");
 					break;
@@ -273,6 +286,8 @@ public class ControladorImp extends Controlador {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Un avion con este ID ya existe");
 				}
 				
+				AvionCreado.publish(avion.getAvionId());
+				
 				if (!saAviones.crearAvion(
 						menu.getAvionId(),
 						Double.parseDouble(menu.getAltura()),
@@ -315,6 +330,8 @@ public class ControladorImp extends Controlador {
 					this.accion(Eventos.MOSTRAR_MENSAJE, error_message);
 					break;
 				}
+				
+				AvionActualizado.publish(menu.getAvionId());
 				
 				if (!saAviones.actualizarAvion(
 						menu.getAvionId(),
@@ -360,6 +377,8 @@ public class ControladorImp extends Controlador {
 				}
 
 				TransferAvion transferAvion = menu.getSelectedAvion();
+				AvionEliminado.publish(transferAvion.getAvionId());
+				
 				if (!saAviones.eliminarAvion(transferAvion.getAvionId())) {
 					this.accion(Eventos.MOSTRAR_MENSAJE, "Error al eliminar avion");
 					break;
